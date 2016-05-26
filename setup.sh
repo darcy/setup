@@ -24,6 +24,7 @@ brew tap caskroom/cask
 brew bundle --file=- <<EOF
 
 brew "git"
+brew "awscli"
 brew "heroku-toolbelt"
 brew "imagemagick"
 brew 's3cmd'
