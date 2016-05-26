@@ -203,10 +203,29 @@ mkdir -p ~/Screen\ Shots
 defaults write com.apple.screencapture location ~/Screen\ Shots
 
 defaults write -g NSUserKeyEquivalents '{
-"Select Next Tab"="@~\U2192";
-"Select Previous Tab"="@~\U2190";
-"Show Next Tab"="@~\U2192";
-"Show Previous Tab"="@~\U2190";
+  "Select Next Tab"="@~\U2192";
+  "Select Previous Tab"="@~\U2190";
+  "Show Next Tab"="@~\U2192";
+  "Show Previous Tab"="@~\U2190";
+}'
+
+defaults write com.evernote.Evernote NSUserKeyEquivalents '{
+  "Show Sidebar" = "@\\";
+  "Hide Sidebar" = "@\\";
+}'
+
+defaults write com.github.GitHub NSUserKeyEquivalents '{
+  "Show Repository List" = "@\\";
+  "Hide Repository List" = "@\\";
+}'
+
+defaults write com.apple.iCal NSUserKeyEquivalents '{
+  "Show Calendar List" = "@\\";
+  "Hide Calendar List" = "@\\";
+}'
+
+defaults write com.spotify.client NSUserKeyEquivalents '{
+  "Friend Feed" = "@\\";
 }'
 
 killall -HUP Dock
