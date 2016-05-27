@@ -72,6 +72,8 @@ cask 'vmware-fusion'
 
 EOF
 
+cd ~/Library/Fonts && curl -fLo "Inconsolata for Powerline Nerd Font Complete.otf" https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/Inconsolata/complete/Inconsolata%20for%20Powerline%20Nerd%20Font%20Complete.otf
+
 sudo gem install tmuxinator
 mkdir -p ~/Work/client ~/Work/scratch ~/Work/dev
 
