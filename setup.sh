@@ -24,6 +24,7 @@ fancy_echo "Updating Homebrew formulae ..."
 brew update
 brew tap Homebrew/bundle
 brew tap caskroom/cask
+brew install vim --override-system-vi
 brew bundle --file=- <<EOF
 
 brew "git"
@@ -34,6 +35,12 @@ brew 's3cmd'
 brew 'wget'
 brew 'mackup'
 brew 'direnv'
+brew 'tmux'
+
+tap 'caskroom/fonts'
+cask 'font-inconsolata'
+cask 'font-fira-mono'
+cask 'font-fira-code'
 
 tap 'codekitchen/dinghy'
 brew 'dinghy'
@@ -52,6 +59,7 @@ cask 'github-desktop'
 cask 'google-chrome'
 cask 'harvest'
 cask 'ipvanish-vpn'
+cask 'iterm2'
 cask 'lastpass'
 cask 'skype'
 cask 'slack'
@@ -64,6 +72,7 @@ cask 'vmware-fusion'
 
 EOF
 
+sudo gem install tmuxinator
 mkdir -p ~/Work/client ~/Work/scratch ~/Work/dev
 
 if [ -d "$HOME/Dropbox/Mackup" ]; then
