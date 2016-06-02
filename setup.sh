@@ -49,7 +49,7 @@ brew 'wget'
 brew 'direnv'
 brew 'tmux'
 brew 'python'
-
+brew 'the_silver_searcher'
 brew 'docker'
 brew 'docker-machine'
 brew 'docker-compose'
