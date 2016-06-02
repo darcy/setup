@@ -22,8 +22,14 @@ if ! command -v brew >/dev/null; then
   else
     sudo apt-get install -y build-essential curl zsh git git-core python-setuptools ruby
     ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install)"
-    wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | zsh
   fi
+fi
+
+fancy_echo "Installing OhMyZsh ..."
+if [ "$(uname)" == "Darwin" ]; then
+  sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+else
+  wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | zsh
 fi
 
 if [ -d "$HOME/Dropbox/Mackup" ]; then
@@ -58,7 +64,6 @@ EOF
 sudo gem install tmuxinator
 mkdir -p ~/Work/client ~/Work/scratch ~/Work/dev
 pip install --upgrade pip
-sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
 if [ "$(uname)" == "Darwin" ]; then
   brew tap caskroom/cask
