@@ -30,7 +30,9 @@ fancy_echo "Updating Homebrew formulae ..."
 brew update
 brew tap Homebrew/bundle
 brew install ruby
+set +e
 brew install vim --override-system-vi
+set -e
 brew bundle --file=- <<EOF
 
 brew "git"
@@ -60,11 +62,11 @@ if [ "$(uname)" == "Darwin" ]; then
   cask 'font-inconsolata'
   cask 'font-fira-mono'
   cask 'font-fira-code'
-  
+
   tap 'codekitchen/dinghy'
   brew 'dinghy'
   brew 'mackup'
-  
+
   cask 'adobe-creative-cloud'
   cask 'atom'
   cask 'dropbox'
@@ -88,127 +90,127 @@ if [ "$(uname)" == "Darwin" ]; then
   cask 'transmit'
   cask 'vmware-fusion'
 EOF
-  
+
   cd ~/Library/Fonts && curl -fLo "Inconsolata for Powerline Nerd Font Complete.otf" https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/Inconsolata/complete/Inconsolata%20for%20Powerline%20Nerd%20Font%20Complete.otf
-  
+
   if [ -d "$HOME/Dropbox/Mackup" ]; then
     fancy_echo "Updating from mackup"
     mackup restore
   fi
   #source $HOME/.bashrc
-  
+
   fancy_echo "Use AirDrop over every interface."
   defaults write com.apple.NetworkBrowser BrowseAllInterfaces 1
-  
+
   fancy_echo "Enable full keyboard access for all controls"
   # (e.g. enable Tab in modal dialogs)
   defaults write NSGlobalDomain AppleKeyboardUIMode -int 3
-  
+
   fancy_echo "Use Graphite Appearance"
   defaults write NSGlobalDomain AppleAquaColorVariant -int 6
-  
+
   fancy_echo "Use Graphite Highlight Color"
   defaults write NSGlobalDomain AppleHighlightColor -string "0.780400 0.815700 0.858800"
-  
+
   fancy_echo "Expand save panel by default"
   defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
-  
+
   fancy_echo "Expand print panel by default"
   defaults write NSGlobalDomain PMPrintingExpandedStateForPrint -bool true
-  
+
   fancy_echo "Save to disk (not to iCloud) by default"
   defaults write NSGlobalDomain NSDocumentSaveNewDocumentsToCloud -bool false
-  
+
   fancy_echo "Stop iTunes from responding to the keyboard media keys"
   launchctl unload -w /System/Library/LaunchAgents/com.apple.rcd.plist || true
-  
+
   fancy_echo "Disable press-and-hold for keys in favor of key repeat"
   defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
-  
+
   fancy_echo "Set a blazingly fast keyboard repeat rate"
   defaults write NSGlobalDomain KeyRepeat -int 0.02
-  
+
   fancy_echo "turn off opening and closing windows and popovers animations"
   # defaults write -g NSAutomaticWindowAnimationsEnabled -bool false
   defaults write NSGlobalDomain NSWindowResizeTime -float 0.001
-  
+
   fancy_echo "Disable auto-correct"
   defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
-  
+
   fancy_echo "Set mouse tracking speed to reasonably fast"
   defaults write NSGlobalDomain com.apple.mouse.scaling -float 2
-  
+
   fancy_echo "Use list view in all Finder windows by default"
   # Four-letter codes for the other view modes: `icnv`, `clmv`, `Flwv`
   defaults write com.apple.finder FXPreferredViewStyle Nlsv
-  
+
   fancy_echo "Finder: allow text selection in Quick Look"
   defaults write com.apple.finder QLEnableTextSelection -bool true
-  
+
   fancy_echo "Disable the warning when changing a file extension"
   defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
-  
+
   fancy_echo "Display full POSIX path as Finder window title"
   defaults write com.apple.finder _FXShowPosixPathInTitle -bool true
-  
+
   fancy_echo "Automatically quit printer app once the print jobs complete"
   defaults write com.apple.print.PrintingPrefs "Quit When Finished" -bool true
-  
+
   fancy_echo "Disable the \"Are you sure you want to open this application?\" dialog"
   defaults write com.apple.LaunchServices LSQuarantine -bool false
-  
+
   fancy_echo "Disable automatic termination of inactive apps"
   defaults write NSGlobalDomain NSDisableAutomaticTermination -bool true
-  
+
   fancy_echo "Empty Trash securely by default"
   defaults write com.apple.finder EmptyTrashSecurely -bool true
-  
+
   fancy_echo "Show all filename extensions"
   defaults write NSGlobalDomain AppleShowAllExtensions -bool true
-  
+
   fancy_echo "Show status bar in Finder"
   defaults write com.apple.finder ShowStatusBar -bool true
-  
+
   fancy_echo "Show path bar in Finder"
   defaults write com.apple.finder ShowPathbar -bool true
-  
+
   fancy_echo "Speed up Mission Control animations"
   defaults write com.apple.dock expose-animation-duration -float 0.1
-  
+
   fancy_echo "Show the ~/Library folder"
   chflags nohidden ~/Library
-  
+
   fancy_echo "Enable Safari’s debug menu"
   defaults write com.apple.Safari IncludeInternalDebugMenu -bool true
   defaults write com.apple.Safari WebKitDeveloperExtrasEnabledPreferenceKey -bool true
   defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2DeveloperExtrasEnabled -bool true
   defaults write NSGlobalDomain WebKitDeveloperExtras -bool true
-  
+
   fancy_echo "Set Safari’s home page to 'about:blank' for faster loading"
   defaults write com.apple.Safari HomePage -string "about:blank"
-  
+
   fancy_echo "Prevent Safari from opening ‘safe’ files automatically after downloading"
   defaults write com.apple.Safari AutoOpenSafeDownloads -bool false
-  
+
   fancy_echo "Remove useless icons from Safari’s bookmarks bar"
   defaults write com.apple.Safari ProxiesInBookmarksBar "()"
-  
+
   fancy_echo "Make Safari’s search banners default to Contains instead of Starts With"
   defaults write com.apple.Safari FindOnPageMatchesWordStartsOnly -bool false
-  
+
   fancy_echo "Reset Launchpad"
   find ~/Library/Application\ Support/Dock -name "*.db" -maxdepth 1 -delete
-  
+
   fancy_echo "Disable the Ping sidebar in iTunes"
   defaults write com.apple.iTunes disablePingSidebar -bool true
-  
+
   fancy_echo "Disable all the other Ping stuff in iTunes"
   defaults write com.apple.iTunes disablePing -bool true
-  
-  
+
+
   # Change minimize/maximize window effect
   defaults write com.apple.dock mineffect -string "scale"
-  
+
   fancy_echo "Hide Spotlight Icon"
   sudo defaults write /.Spotlight-V100/VolumeConfiguration Exclusions -array "/Volumes"
   fancy_echo "Rebuild Spotlight"
@@ -237,71 +239,71 @@ EOF
   fancy_echo "Rebuild the index from scratch"
   sudo mdutil -E / > /dev/null
   set -e
-  
+
   fancy_echo "Don’t animate opening applications from the Dock"
   defaults write com.apple.dock launchanim -bool false
-  
+
   fancy_echo "Minimal Dock"
   defaults write com.apple.dock no-glass -bool true
   defaults write com.apple.dock autohide -int 1
   fancy_echo "Move Dock to the right"
   defaults write com.apple.dock orientation -string "right"
-  
+
   # Move Dock to the top
   defaults write com.apple.dock pinning -string "start"
-  
+
   fancy_echo "Remove the auto-hiding Dock delay"
   defaults write com.apple.dock autohide-delay -float 0
-  
+
   fancy_echo "Remove the animation when hiding/showing the Dock"
   defaults write com.apple.dock autohide-time-modifier -float 0
-  
+
   fancy_echo "Automatically hide and show the Dock"
   defaults write com.apple.dock autohide -bool true
-  
+
   fancy_echo "Clear everything from Dock"
   set +e
   defaults delete com.apple.dock persistent-apps
   defaults delete com.apple.dock persistent-others
   set -e
-  
+
   fancy_echo "When performing a search, search the current folder by default"
   defaults write com.apple.finder FXDefaultSearchScope -string "SCcf"
-  
+
   ### Spaces
-  
+
   fancy_echo "Don’t automatically rearrange Spaces based on most recent use"
   defaults write com.apple.dock mru-spaces -bool false
-  
+
   fancy_echo "Set edge-dragging delay to 0.7"
   defaults write com.apple.dock workspaces-edge-delay -float 1.0
-  
+
   fancy_echo "Hide icons for hard drives, servers, and removable media on the desktop"
   defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool false
   defaults write com.apple.finder ShowHardDrivesOnDesktop -bool false
   defaults write com.apple.finder ShowMountedServersOnDesktop -bool false
   defaults write com.apple.finder ShowRemovableMediaOnDesktop -bool false
-  
+
   fancy_echo "Disable sound effect when changing volume"
   defaults write -g com.apple.sound.beep.feedback -integer 0
-  
+
   fancy_echo "Avoid creating .DS_Store files on network volumes"
   defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
-  
+
   fancy_echo "Set the icon size of Dock items to 26 pixels"
   defaults write com.apple.dock tilesize -int 26
-  
+
   # Trackpad: disable tap to click for this user and for the login screen
   # defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool false
   # defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 0
   # defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 0
-  
+
   ### Screen Shots
-  
+
   fancy_echo "Move screen shots to ~/Screen Shots"
   mkdir -p ~/Screen\ Shots
   defaults write com.apple.screencapture location ~/Screen\ Shots
-  
+
   fancy_echo "Set Prev/Next Tab Shortcuts"
   defaults write -g NSUserKeyEquivalents '{
     "Select Next Tab"="@~\U2192";
@@ -309,57 +311,57 @@ EOF
     "Show Next Tab"="@~\U2192";
     "Show Previous Tab"="@~\U2190";
   }'
-  
+
   fancy_echo "Set Sidebar Shortcut for Evernote"
   defaults write com.evernote.Evernote NSUserKeyEquivalents '{
     "Show Sidebar" = "@\\";
     "Hide Sidebar" = "@\\";
   }'
-  
+
   fancy_echo "Set Sidebar Shortcut for Github"
   defaults write com.github.GitHub NSUserKeyEquivalents '{
     "Show Repository List" = "@\\";
     "Hide Repository List" = "@\\";
   }'
-  
+
   fancy_echo "Set Sidebar Shortcut for Calendar"
   defaults write com.apple.iCal NSUserKeyEquivalents '{
     "Show Calendar List" = "@\\";
     "Hide Calendar List" = "@\\";
   }'
-  
+
   fancy_echo "Set Sidebar Shortcut for Spotify"
   defaults write com.spotify.client NSUserKeyEquivalents '{
     "Friend Feed" = "@\\";
   }'
-  
+
   fancy_echo "Only use UTF-8 in Terminal.app"
   defaults write com.apple.terminal StringEncodings -array 4
-  
+
   fancy_echo "Show the main window when launching Activity Monitor"
   defaults write com.apple.ActivityMonitor OpenMainWindow -bool true
-  
+
   fancy_echo "Visualize CPU usage in the Activity Monitor Dock icon"
   defaults write com.apple.ActivityMonitor IconType -int 5
-  
+
   fancy_echo "Show all processes in Activity Monitor"
   defaults write com.apple.ActivityMonitor ShowCategory -int 0
-  
+
   fancy_echo "Sort Activity Monitor results by CPU usage"
   defaults write com.apple.ActivityMonitor SortColumn -string "CPUUsage"
   defaults write com.apple.ActivityMonitor SortDirection -int 0
-  
+
   fancy_echo "Use plain text mode for new TextEdit documents"
   defaults write com.apple.TextEdit RichText -int 0
   fancy_echo "Open and save files as UTF-8 in TextEdit"
   defaults write com.apple.TextEdit PlainTextEncoding -int 4
   defaults write com.apple.TextEdit PlainTextEncodingForWrite -int 4
-  
+
   fancy_echo "Enable the WebKit Developer Tools in the Mac App Store"
   defaults write com.apple.appstore WebKitDeveloperExtras -bool true
   fancy_echo "Enable Debug Menu in the Mac App Store"
   defaults write com.apple.appstore ShowDebugMenu -bool true
-  
+
   killall -HUP Dock
   killall -HUP Finder
   killall -HUP SystemUIServer
