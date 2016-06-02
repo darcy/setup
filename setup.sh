@@ -26,6 +26,11 @@ if ! command -v brew >/dev/null; then
   fi
 fi
 
+if [ -d "$HOME/Dropbox/Mackup" ]; then
+  fancy_echo "Updating from mackup"
+  mackup restore
+fi
+
 fancy_echo "Updating Homebrew formulae ..."
 brew update
 brew tap Homebrew/bundle
@@ -93,10 +98,6 @@ EOF
 
   cd ~/Library/Fonts && curl -fLo "Inconsolata for Powerline Nerd Font Complete.otf" https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/Inconsolata/complete/Inconsolata%20for%20Powerline%20Nerd%20Font%20Complete.otf
 
-  if [ -d "$HOME/Dropbox/Mackup" ]; then
-    fancy_echo "Updating from mackup"
-    mackup restore
-  fi
   #source $HOME/.bashrc
 
   fancy_echo "Use AirDrop over every interface."
