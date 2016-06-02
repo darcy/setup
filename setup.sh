@@ -34,8 +34,8 @@ fi
 fancy_echo "Updating Homebrew formulae ..."
 brew update
 brew tap Homebrew/bundle
-brew install ruby
 set +e
+brew install ruby
 brew install vim --override-system-vi
 set -e
 brew bundle --file=- <<EOF
