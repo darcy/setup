@@ -36,6 +36,7 @@ brew 'wget'
 brew 'mackup'
 brew 'direnv'
 brew 'tmux'
+brew 'python'
 
 tap 'caskroom/fonts'
 cask 'font-inconsolata'
@@ -61,6 +62,7 @@ cask 'harvest'
 cask 'ipvanish-vpn'
 cask 'iterm2'
 cask 'lastpass'
+cask 'rowanj-gitx'
 cask 'skype'
 cask 'slack'
 cask 'spotify'
@@ -71,6 +73,7 @@ cask 'transmit'
 cask 'vmware-fusion'
 
 EOF
+pip install --upgrade pip
 
 cd ~/Library/Fonts && curl -fLo "Inconsolata for Powerline Nerd Font Complete.otf" https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/Inconsolata/complete/Inconsolata%20for%20Powerline%20Nerd%20Font%20Complete.otf
 
@@ -351,4 +354,5 @@ killall -HUP Finder
 killall -HUP SystemUIServer
 killall cfprefsd
 
+sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 fancy_echo "All DONE - might need to restart"
