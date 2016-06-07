@@ -373,4 +373,10 @@ EOF
   killall -HUP SystemUIServer
   killall cfprefsd
 fi
+
+mkdir -p ~/.vim/bundle
+if [ ! -d "$HOME/.vim/bundle/Vundle.vim" ]; then
+  git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/Vundle.vim
+fi
+
 fancy_echo "All DONE - might need to restart"
