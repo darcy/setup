@@ -378,5 +378,7 @@ mkdir -p ~/.vim/bundle
 if [ ! -d "$HOME/.vim/bundle/Vundle.vim" ]; then
   git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/Vundle.vim
 fi
+set -e
+vim +PluginInstall +qall
 
 fancy_echo "All DONE - might need to restart"
