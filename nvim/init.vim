@@ -19,6 +19,7 @@ Plug 'terryma/vim-multiple-cursors'
 Plug 'pangloss/vim-javascript'
 Plug 'kchmck/vim-coffee-script'
 Plug 'vim-ruby/vim-ruby'
+Plug 'mhartington/oceanic-next'
 "
 call plug#end()
 
@@ -36,15 +37,20 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
-
-colorscheme onedark
-" hi Normal ctermbg=none
-let g:airline_theme='onedark'
-let g:airline#extensions#tabline#enabled = 1
-" following is a workaround fix for airline bgterm issue
-autocmd VimEnter * hi Normal ctermbg=none
-" let g:airline_theme='sol'
-
+" Theme
+syntax enable
+let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+colorscheme OceanicNext
+set background=dark
+let g:airline_theme='oceanicnext'
+" colorscheme onedark
+" " hi Normal ctermbg=none
+" let g:airline_theme='onedark'
+" let g:airline#extensions#tabline#enabled = 1
+" " following is a workaround fix for airline bgterm issue
+" autocmd VimEnter * hi Normal ctermbg=none
+" " let g:airline_theme='sol'
+"
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 map <C-\> :NERDTreeToggle<CR>
@@ -61,7 +67,7 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 set noswapfile
 
 set cursorline
-hi CursorLine term=bold cterm=bold guibg=Grey40
+hi CursorLine term=bold cterm=bold guibg=Grey20
 
 nmap <S-Left> :bprev<CR>
 nmap <S-Right> :bnext<CR>
