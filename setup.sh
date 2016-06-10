@@ -59,6 +59,7 @@ brew 'the_silver_searcher'
 brew 'docker'
 brew 'docker-machine'
 brew 'docker-compose'
+brew 'neovim/neovim/neovim'
 EOF
 
 sudo gem install tmuxinator
@@ -76,7 +77,6 @@ if [ "$(uname)" == "Darwin" ]; then
   tap 'codekitchen/dinghy'
   brew 'dinghy'
   brew 'mackup'
-
   cask 'adobe-creative-cloud'
   cask 'atom'
   cask 'dropbox'
@@ -374,11 +374,24 @@ EOF
   killall cfprefsd
 fi
 
-mkdir -p ~/.vim/bundle
-if [ ! -d "$HOME/.vim/bundle/Vundle.vim" ]; then
-  git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/Vundle.vim
+# mkdir -p ~/.vim/bundle
+# if [ ! -d "$HOME/.vim/bundle/Vundle.vim" ]; then
+#   git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/Vundle.vim
+# fi
+mkdir -p $HOME/.config
+
+if [ ! -d "$HOME/.config/darcy-setup" ]; then
+  git clone git://github.com/darcy/setup.git $HOME/.config/darcy-setup
 fi
+
+ln -s $HOME/.config/nvim $HOME/.config/darcy-setup/nvim
+
+if [ ! -d "$HOME/.config/nvim/autoload/plug.vim" ]; then
+  curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+fi
+
 set -e
-vim +PluginInstall +qall
+# vim +PluginInstall +qall
 
 fancy_echo "All DONE - might need to restart"
