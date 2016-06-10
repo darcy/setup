@@ -12,10 +12,12 @@ set -gx PATH $HOME/Dropbox/Tools/System/bin $PATH
 export LC_CTYPE=en_US.UTF-8
 # export TERM=xterm-256color
 
+set -xU LS_COLORS gxfxcxdxbxegedabagacad
+
 alias v=nvim
-alias l="ls -l"
-alias ls="ls -l"
-alias la="ls -la"
+alias l="ls -lhFG"
+alias ls="ls -lhFG"
+alias la="ls -lahFG"
 alias rm="rm -i"
 alias vi="vim"
 alias cdc='cd ~/Work/client'
