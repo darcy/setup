@@ -378,20 +378,19 @@ fi
 # if [ ! -d "$HOME/.vim/bundle/Vundle.vim" ]; then
 #   git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/Vundle.vim
 # fi
-mkdir -p $HOME/.config
+mkdir -p $HOME/.config/nvim
 
 if [ ! -d "$HOME/.config/darcy-setup" ]; then
   git clone git://github.com/darcy/setup.git $HOME/.config/darcy-setup
 fi
-
-ln -s $HOME/.config/nvim $HOME/.config/darcy-setup/nvim
+ln -s $HOME/.config/darcy-setup/nvim/init.vim $HOME/.config/nvim/init.vim
 
 if [ ! -d "$HOME/.config/nvim/autoload/plug.vim" ]; then
   curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 fi
 
-set -e
-# vim +PluginInstall +qall
+# set -e
+# nvim +PlugInstall +qall
 
 fancy_echo "All DONE - might need to restart"
