@@ -25,16 +25,18 @@ if ! command -v brew >/dev/null; then
   fi
 fi
 
-fancy_echo "Installing OhMyZsh ..."
-if [ "$(uname)" == "Darwin" ]; then
-  sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-else
-  wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | zsh
+if ! command -v zsh >/dev/null; then
+  fancy_echo "Installing OhMyZsh ..."
+  if [ "$(uname)" == "Darwin" ]; then
+    sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+  else
+    wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | zsh
+  fi
 fi
 
 if [ -d "$HOME/Dropbox/Mackup" ]; then
   fancy_echo "Updating from mackup"
-  mackup restore
+  #mackup restore
 fi
 
 fancy_echo "Updating Homebrew formulae ..."
@@ -58,6 +60,7 @@ brew 'python'
 brew 'the_silver_searcher'
 brew 'docker'
 brew 'fzf'
+brew 'fish'
 brew 'docker-machine'
 brew 'docker-compose'
 brew 'neovim/neovim/neovim'
@@ -380,11 +383,20 @@ fi
 #   git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/Vundle.vim
 # fi
 mkdir -p $HOME/.config/nvim
+mkdir -p $HOME/.config/fish/functions
 
 if [ ! -d "$HOME/.config/darcy-setup" ]; then
   git clone git://github.com/darcy/setup.git $HOME/.config/darcy-setup
 fi
-ln -s $HOME/.config/darcy-setup/nvim/init.vim $HOME/.config/nvim/init.vim
+if [ ! -f "$HOME/.config/nvim/init.vim" ]; then
+  ln -s $HOME/.config/darcy-setup/config/nvim/init.vim $HOME/.config/nvim/init.vim
+fi
+if [ ! -f "$HOME/.config/fish/config.fish" ]; then
+  ln -s $HOME/.config/darcy-setup/config/fish/config.fish $HOME/.config/fish/config.fish
+fi
+if [ ! -f "$HOME/.config/fish/functions/fish_prompt.fish" ]; then
+  ln -s $HOME/.config/darcy-setup/config/fish/functions/fish_prompt.fish $HOME/.config/fish/functions/fish_prompt.fish
+fi
 
 if [ ! -d "$HOME/.config/nvim/autoload/plug.vim" ]; then
   curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs \
@@ -393,5 +405,17 @@ fi
 
 # set -e
 # nvim +PlugInstall +qall
+
+grep -q -F '/usr/local/bin/fish' /etc/shells || echo '/usr/local/bin/fish' | sudo tee -a /etc/shells
+chsh -s /usr/local/bin/fish
+if [ ! -d "$HOME/.config/fish/functions/fisher.fish" ]; then
+  curl -Lo ~/.config/fish/functions/fisher.fish --create-dirs git.io/fisher
+fi
+#fisher z fzf pure
+
+if ! command -v omf > /dev/null; then
+  curl -L https://github.com/oh-my-fish/oh-my-fish/raw/master/bin/install | fish
+fi
+#omf install fzf
 
 fancy_echo "All DONE - might need to restart"
