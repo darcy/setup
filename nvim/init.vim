@@ -9,8 +9,10 @@ Plug 'tpope/vim-surround'
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/syntastic'
 Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'rking/ag.vim'
-Plug 'ctrlpvim/ctrlp.vim'
+"Plug 'rking/ag.vim'
+"Plug 'ctrlpvim/ctrlp.vim'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'altercation/vim-colors-solarized'
 Plug 'ryanoasis/vim-devicons'
@@ -20,6 +22,7 @@ Plug 'pangloss/vim-javascript'
 Plug 'kchmck/vim-coffee-script'
 Plug 'vim-ruby/vim-ruby'
 Plug 'mhartington/oceanic-next'
+"Plug 'Valloric/MatchTagAlways'
 "
 call plug#end()
 
@@ -40,6 +43,7 @@ let g:syntastic_check_on_wq = 0
 " Theme
 syntax enable
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 colorscheme OceanicNext
 set background=dark
 let g:airline_theme='oceanicnext'
@@ -51,8 +55,63 @@ let g:airline_theme='oceanicnext'
 " autocmd VimEnter * hi Normal ctermbg=none
 " " let g:airline_theme='sol'
 "
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+  set clipboard+=unnamedplus
+" Currently needed for neovim paste issue
+  set pastetoggle=<f6>
+  set nopaste
+" Let airline tell me my status
+  set noshowmode
+  filetype on
+  set relativenumber number
+  set tabstop=2 shiftwidth=2 expandtab
+  set conceallevel=0
+" block select not limited by shortest line
+  set virtualedit=
+  set wildmenu
+  set laststatus=2
+  "set colorcolumn=100
+  set wrap linebreak nolist
+  set wildmode=full
+  let mapleader = ','
+  set undofile
+  set undodir="$HOME/.VIM_UNDO_FILES"
+" Remember cursor position between vim sessions
+  autocmd BufReadPost *
+              \ if line("'\"") > 0 && line ("'\"") <= line("$") |
+              \   exe "normal! g'\"" |
+              \ endif
+              " center buffer around cursor when opening files
+  autocmd BufRead * normal zz
+
+" No need for ex mode
+  nnoremap Q <nop>
+" recording macros is not my thing
+  map q <Nop>
+
+nnoremap ; :
+" Copy to osx clipboard
+  vnoremap <C-c> "*y<CR>
+  vnoremap y "*y<CR>
+  nnoremap Y "*Y<CR>
+  let g:multi_cursor_next_key='<C-n>'
+  let g:multi_cursor_prev_key='<C-p>'
+  let g:multi_cursor_skip_key='<C-x>'
+  let g:multi_cursor_quit_key='<Esc>'
+
+" Align blocks of text and keep them selected
+  vmap < <gv
+  vmap > >gv
+  map <esc> :noh<cr>
+
+" turn on spelling for markdown files
+autocmd FileType markdown,text,html setlocal spell complete+=kspell
+" highlight bad words in red
+autocmd FileType markdown,text,html hi SpellBad guibg=#ff2929 guifg=#ffffff" ctermbg=224
+
+" NERDTree --------------------------------------------
+"
+"autocmd StdinReadPre * let s:std_in=1
+"autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 map <C-\> :NERDTreeToggle<CR>
 " with NERDTree don't close all buffers
 " http://stackoverflow.com/questions/31805805/vim-close-buffer-with-nerdtree
@@ -62,6 +121,32 @@ map <C-\> :NERDTreeToggle<CR>
 nmap <S-w> :bp\|bd #<CR>
 " close NERDtree if last thing open
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+let g:NERDTreeAutoDeleteBuffer=1
+  " NERDTress File highlighting
+  function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
+  exec 'autocmd FileType nerdtree highlight ' . a:extension .' ctermbg='. a:bg .' ctermfg='. a:fg .' guibg='. a:guibg .' guifg='. a:guifg
+  exec 'autocmd FileType nerdtree syn match ' . a:extension .' #^\s\+.*'. a:extension .'$#'
+  endfunction
+" let NERDTreeShowHidden=1
+  call NERDTreeHighlightFile('jade', 'green', 'none', 'green', 'none')
+  call NERDTreeHighlightFile('md', 'blue', 'none', '#6699CC', 'none')
+  call NERDTreeHighlightFile('config', 'yellow', 'none', '#d8a235', 'none')
+  call NERDTreeHighlightFile('yml', 'yellow', 'none', '#d8a235', 'none')
+  call NERDTreeHighlightFile('conf', 'yellow', 'none', '#d8a235', 'none')
+  call NERDTreeHighlightFile('json', 'green', 'none', '#d8a235', 'none')
+  call NERDTreeHighlightFile('html', 'yellow', 'none', '#d8a235', 'none')
+  call NERDTreeHighlightFile('erb', 'yellow', 'none', '#d8a235', 'none')
+  call NERDTreeHighlightFile('rb', 'green', 'none', '#94B9A0', 'none')
+  call NERDTreeHighlightFile('css', 'cyan', 'none', '#5486C0', 'none')
+  call NERDTreeHighlightFile('scss', 'cyan', 'none', '#5486C0', 'none')
+  call NERDTreeHighlightFile('coffee', 'Red', 'none', 'red', 'none')
+  call NERDTreeHighlightFile('js', 'Red', 'none', '#ffa500', 'none')
+  call NERDTreeHighlightFile('ts', 'Blue', 'none', '#6699cc', 'none')
+  call NERDTreeHighlightFile('ds_store', 'Gray', 'none', '#686868', 'none')
+  call NERDTreeHighlightFile('gitconfig', 'black', 'none', '#686868', 'none')
+  call NERDTreeHighlightFile('gitignore', 'Gray', 'none', '#7F7F7F', 'none')
+
+"}}}
 
 " Trigger filesystem notifications so guard picks up
 set noswapfile
@@ -106,6 +191,15 @@ if executable('ag')
   let g:ctrlp_use_caching = 0
 endif
 
+" FZF ----------------------------
+ map <c-p> :FZF<CR>
+ tmap <c-p> <c-\><c-n>:FZF<CR>
+ map <leader>a :Ag<CR>
+ vmap <leader>aw y:Ag <C-r>0<CR>
+ map <leader>h :History<CR>
+ map <leader>l :Lines<CR>
+
+" Terminal -----------------------
 :tnoremap <A-h> <C-\><C-n><C-w>h
 :tnoremap <A-j> <C-\><C-n><C-w>j
 :tnoremap <A-k> <C-\><C-n><C-w>k
