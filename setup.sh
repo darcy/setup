@@ -410,14 +410,14 @@ fi
 # set -e
 # nvim +PlugInstall +qall
 
-if [ -f "$HOME/.linuxbrew/bin/fish" ]; then
-  grep -q -F '$HOME/.linuxbrew/bin/fish' /etc/shells || echo '$HOME/.linuxbrew/bin/fish' | sudo tee -a /etc/shells
-  chsh -s $HOME/.linuxbrew/bin/fish
-fi
-if [ -d "$HOME/.linuxbrew/bin/fish" ]; then
-  grep -q -F '/usr/local/bin/fish' /etc/shells || echo '/usr/local/bin/fish' | sudo tee -a /etc/shells
-  chsh -s /usr/local/bin/fish
-fi
+# if [ -f "$HOME/.linuxbrew/bin/fish" ]; then
+#   grep -q -F '$HOME/.linuxbrew/bin/fish' /etc/shells || echo '$HOME/.linuxbrew/bin/fish' | sudo tee -a /etc/shells
+#   chsh -s $HOME/.linuxbrew/bin/fish
+# fi
+# if [ -d "$HOME/.linuxbrew/bin/fish" ]; then
+  grep -q -F '`which fish`' /etc/shells || echo '`which fish`' | sudo tee -a /etc/shells
+  chsh -s `which fish`
+# fi
 
 if [ ! -d "$HOME/.config/fish/functions/fisher.fish" ]; then
   curl -Lo ~/.config/fish/functions/fisher.fish --create-dirs git.io/fisher
