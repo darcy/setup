@@ -63,7 +63,8 @@ brew 'fzf'
 brew 'fish'
 brew 'docker-machine'
 brew 'docker-compose'
-brew 'neovim/neovim/neovim'
+tap 'neovim/neovim'
+brew 'neovim'
 EOF
 
 sudo gem install tmuxinator
