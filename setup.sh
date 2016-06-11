@@ -415,7 +415,7 @@ fi
 #   chsh -s $HOME/.linuxbrew/bin/fish
 # fi
 # if [ -d "$HOME/.linuxbrew/bin/fish" ]; then
-  grep -q -F '`which fish`' /etc/shells || echo '`which fish`' | sudo tee -a /etc/shells
+  grep -q -F `which fish` /etc/shells || echo `which fish` | sudo tee -a /etc/shells
   chsh -s `which fish`
 # fi
 
