@@ -409,7 +409,7 @@ fi
 
 if [ -d "$HOME/.linuxbrew/bin/fish" ]; then
   grep -q -F '$HOME/.linuxbrew/bin/fish' /etc/shells || echo '$HOME/.linuxbrew/bin/fish' | sudo tee -a /etc/shells
-  chsh -s $HOME/.linuxbrew/bin/fish
+  sudo chsh -s $HOME/.linuxbrew/bin/fish
 fi
 if [ -d "$HOME/.linuxbrew/bin/fish" ]; then
   grep -q -F '/usr/local/bin/fish' /etc/shells || echo '/usr/local/bin/fish' | sudo tee -a /etc/shells
