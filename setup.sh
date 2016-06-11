@@ -67,7 +67,10 @@ tap 'neovim/neovim'
 brew 'neovim'
 EOF
 
-sudo gem install tmuxinator
+if ! command -v tmuxinator >/dev/null; then
+  sudo gem install tmuxinator
+fi
+
 mkdir -p ~/Work/client ~/Work/scratch ~/Work/dev
 pip install --upgrade pip
 
@@ -407,7 +410,7 @@ fi
 # set -e
 # nvim +PlugInstall +qall
 
-if [ -d "$HOME/.linuxbrew/bin/fish" ]; then
+if [ -f "$HOME/.linuxbrew/bin/fish" ]; then
   grep -q -F '$HOME/.linuxbrew/bin/fish' /etc/shells || echo '$HOME/.linuxbrew/bin/fish' | sudo tee -a /etc/shells
   chsh -s $HOME/.linuxbrew/bin/fish
 fi
@@ -421,7 +424,7 @@ if [ ! -d "$HOME/.config/fish/functions/fisher.fish" ]; then
 fi
 #fisher z fzf pure
 
-if ! command -v omf > /dev/null; then
+if [ ! -d "$HOME/.local/share/omf" ]; then
   curl -L https://github.com/oh-my-fish/oh-my-fish/raw/master/bin/install | fish
 fi
 #omf install fzf
