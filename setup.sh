@@ -386,6 +386,15 @@ fi
 # if [ ! -d "$HOME/.vim/bundle/Vundle.vim" ]; then
 #   git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/Vundle.vim
 # fi
+if [ ! -d "$HOME/.local/share/omf" ]; then
+  curl -L https://github.com/oh-my-fish/oh-my-fish/raw/master/bin/install | fish
+fi
+#omf install fzf
+if [ ! -d "$HOME/.config/fish/functions/fisher.fish" ]; then
+  curl -Lo ~/.config/fish/functions/fisher.fish --create-dirs git.io/fisher
+fi
+#fisher z fzf pure
+
 mkdir -p $HOME/.config/nvim
 mkdir -p $HOME/.config/fish/functions
 
@@ -419,14 +428,6 @@ fi
   chsh -s `which fish`
 # fi
 
-if [ ! -d "$HOME/.config/fish/functions/fisher.fish" ]; then
-  curl -Lo ~/.config/fish/functions/fisher.fish --create-dirs git.io/fisher
-fi
-#fisher z fzf pure
 
-if [ ! -d "$HOME/.local/share/omf" ]; then
-  curl -L https://github.com/oh-my-fish/oh-my-fish/raw/master/bin/install | fish
-fi
-#omf install fzf
 
 fancy_echo "All DONE - might need to restart"
