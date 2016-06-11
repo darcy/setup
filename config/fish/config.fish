@@ -8,9 +8,16 @@
 #source $OMF_PATH/init.fish
 
 export EDITOR=nvim
-set -gx PATH $HOME/Dropbox/Tools/System/bin $PATH
+if test -d $HOME/Dropbox
+  set -gx PATH $HOME/Dropbox/Tools/System/bin $PATH
+end
+if test -d $HOME/.linuxbrew
+  set -gx PATH $HOME/.linuxbrew/bin $PATH
+end
+
 export LC_CTYPE=en_US.UTF-8
 # export TERM=xterm-256color
+export MAKEFILE_FISH_SHELL=1
 
 set -xU LS_COLORS gxfxcxdxbxegedabagacad
 

@@ -47,10 +47,10 @@ let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 colorscheme OceanicNext
 set background=dark
 let g:airline_theme='oceanicnext'
+let g:airline#extensions#tabline#enabled = 1
 " colorscheme onedark
 " " hi Normal ctermbg=none
 " let g:airline_theme='onedark'
-" let g:airline#extensions#tabline#enabled = 1
 " " following is a workaround fix for airline bgterm issue
 " autocmd VimEnter * hi Normal ctermbg=none
 " " let g:airline_theme='sol'
