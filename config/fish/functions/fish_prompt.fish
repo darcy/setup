@@ -68,6 +68,9 @@ function fish_prompt
     end
   end
 
+  set -g __fish_prompt_hostname (hostname|cut -d . -f 1)
+  set host "$blue$__fish_prompt_hostname:"
+
   # echo -n -s $arrow ' '$cwd $repo_info $normal ' '
-  echo -n $cwd $repo_info (set_color red)'❯'(set_color yellow)'❯'(set_color green)'❯ '
+  echo -n $host$cwd $repo_info (set_color red)'❯'(set_color yellow)'❯'(set_color green)'❯ '
 end
