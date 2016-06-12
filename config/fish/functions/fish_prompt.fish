@@ -69,5 +69,5 @@ function fish_prompt
   end
 
   # echo -n -s $arrow ' '$cwd $repo_info $normal ' '
-  echo -n (set_color cyan) $cwd $repo_info (set_color red)'❯'(set_color yellow)'❯'(set_color green)'❯ '
+  echo -n $cwd $repo_info (set_color red)'❯'(set_color yellow)'❯'(set_color green)'❯ '
 end

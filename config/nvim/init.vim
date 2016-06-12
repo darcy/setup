@@ -1,3 +1,4 @@
+set shell=/bin/zsh
 call plug#begin('~/.vim/plugged')
 
 Plug 'VundleVim/Vundle.vim'
@@ -22,6 +23,7 @@ Plug 'pangloss/vim-javascript'
 Plug 'kchmck/vim-coffee-script'
 Plug 'vim-ruby/vim-ruby'
 Plug 'mhartington/oceanic-next'
+Plug 'tomtom/tcomment_vim'
 "Plug 'Valloric/MatchTagAlways'
 "
 call plug#end()
@@ -113,12 +115,13 @@ autocmd FileType markdown,text,html hi SpellBad guibg=#ff2929 guifg=#ffffff" cte
 "autocmd StdinReadPre * let s:std_in=1
 "autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 map <C-\> :NERDTreeToggle<CR>
+let g:nerdtree_tabs_autoclose=0
 " with NERDTree don't close all buffers
 " http://stackoverflow.com/questions/31805805/vim-close-buffer-with-nerdtree
 " nnoremap c :bp\|bd #<CR>
 " shift-w to close current buffer
 " nmap <S-w> :bd<CR>
-nmap <S-w> :bp\|bd #<CR>
+nmap <A-w> :bp\|bd #<CR>
 " close NERDtree if last thing open
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 let g:NERDTreeAutoDeleteBuffer=1
@@ -154,8 +157,6 @@ set noswapfile
 set cursorline
 hi CursorLine term=bold cterm=bold guibg=Grey20
 
-nmap <S-Left> :bprev<CR>
-nmap <S-Right> :bnext<CR>
 
 " move tabs to the end for new, single buffers (exclude splits)
 autocmd BufNew * if winnr('$') == 1 | tabmove99 | endif
@@ -200,12 +201,22 @@ endif
  map <leader>l :Lines<CR>
 
 " Terminal -----------------------
+:tnoremap <Esc> <C-\><C-n>
 :tnoremap <A-h> <C-\><C-n><C-w>h
 :tnoremap <A-j> <C-\><C-n><C-w>j
 :tnoremap <A-k> <C-\><C-n><C-w>k
 :tnoremap <A-l> <C-\><C-n><C-w>l
-:tnoremap <Esc> <C-\><C-n>
+:tnoremap <A-Left> <C-\><C-n><C-w>h
+:tnoremap <A-Down> <C-\><C-n><C-w>j
+:tnoremap <A-Up> <C-\><C-n><C-w>k
+:tnoremap <A-Right> <C-\><C-n><C-w>l
 :nnoremap <A-h> <C-w>h
 :nnoremap <A-j> <C-w>j
 :nnoremap <A-k> <C-w>k
 :nnoremap <A-l> <C-w>l
+:nnoremap <A-Up> <C-w>h
+:nnoremap <A-Down> <C-w>j
+:nnoremap <A-Up> <C-w>k
+:nnoremap <A-Right> <C-w>l
+:nmap <A-Left> :bprev<CR>
+:nmap <A-Right> :bnext<CR>

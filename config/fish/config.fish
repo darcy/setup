@@ -54,6 +54,8 @@ alias gsa='git stash apply'
 alias gclean='git clean -df'
 alias gitrmall='git ls-files --deleted | xargs git rm'
 
+alias sshw='ssh -A 52.9.249.65'
+
 ulimit -n 1024
 eval (direnv hook fish)
 
