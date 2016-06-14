@@ -1,3 +1,4 @@
+set encoding=utf8
 set shell=/bin/zsh
 call plug#begin('~/.vim/plugged')
 
@@ -29,11 +30,23 @@ function! DoRemote(arg)
   UpdateRemotePlugins
 endfunction
 Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
+"Plug 'ternjs/tern_for_vim', { 'do': 'npm install' }
+Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install tern' }
 "Plug 'Valloric/MatchTagAlways'
 "
 call plug#end()
 
 let g:deoplete#enable_at_startup = 1
+if !exists('g:deoplete#omni#input_patterns')
+  let g:deoplete#omni#input_patterns = {}
+endif
+" let g:deoplete#disable_auto_complete = 1
+" autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
+" Let <Tab> also do completion
+" inoremap <silent><expr> <Tab>  pumvisible() ? "\<C-n>" :  deoplete#mappings#manual_complete()
+
+let g:tern_request_timeout = 1
+let g:tern_show_signature_in_pum = 0  " This do disable full signature type on autocomplete
 
 " configure syntastic syntax checking to check on open as well as save
 let g:syntastic_check_on_open=1
@@ -176,7 +189,6 @@ autocmd BufWritePre * :%s/\s\+$//e
 set list listchars=tab:»·,trail:·,nbsp:·
 
 " Devicons https://github.com/ryanoasis/vim-devicons
-set encoding=utf8
 let g:airline_powerline_fonts = 1
 set guifont=Inconsolata\ for\ Powerline\ Plus\ Nerd\ File\ Types:h11
 
