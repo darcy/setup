@@ -65,8 +65,12 @@ brew 'docker-machine'
 brew 'docker-compose'
 tap 'neovim/neovim'
 brew 'neovim'
+brew 'node'
+brew 'python3'
 EOF
 
+pip3 install neovim
+npm install -g coffee-script
 if ! command -v tmuxinator >/dev/null; then
   sudo gem install tmuxinator
 fi

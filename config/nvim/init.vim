@@ -25,9 +25,15 @@ Plug 'kchmck/vim-coffee-script'
 Plug 'vim-ruby/vim-ruby'
 Plug 'mhartington/oceanic-next'
 Plug 'tomtom/tcomment_vim'
+function! DoRemote(arg)
+  UpdateRemotePlugins
+endfunction
+Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
 "Plug 'Valloric/MatchTagAlways'
 "
 call plug#end()
+
+let g:deoplete#enable_at_startup = 1
 
 " configure syntastic syntax checking to check on open as well as save
 let g:syntastic_check_on_open=1
