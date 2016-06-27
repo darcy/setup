@@ -55,6 +55,10 @@ alias gclean='git clean -df'
 alias gitrmall='git ls-files --deleted | xargs git rm'
 
 alias sshw='ssh -A 52.9.249.65'
+alias sshfp1n='ssh frontpoint@tm26-s00059  -p 7000'
+alias sshfp2n='ssh frontpoint@tm26-s00060  -p 7001'
+alias sshfpdb1n='ssh frontpoint@tm26-s00062  -p 7003'
+alias sshfpsn='ssh frontpoint@tm26-s00058  -p 7000'
 
 ulimit -n 1024
 eval (direnv hook fish)
