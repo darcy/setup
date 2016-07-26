@@ -9,8 +9,9 @@ Plug 'tpope/vim-rails'
 Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-jdaddy'
-Plug 'scrooloose/nerdtree'
-Plug 'scrooloose/syntastic'
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+"Plug 'scrooloose/syntastic'
+Plug 'neomake/neomake'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 "Plug 'rking/ag.vim'
 "Plug 'ctrlpvim/ctrlp.vim'
@@ -25,6 +26,7 @@ Plug 'pangloss/vim-javascript'
 Plug 'kchmck/vim-coffee-script'
 Plug 'vim-ruby/vim-ruby'
 Plug 'mhartington/oceanic-next'
+"Plug 'vim-ctrlspace/vim-ctrlspace'
 Plug 'tomtom/tcomment_vim'
 function! DoRemote(arg)
   UpdateRemotePlugins
@@ -49,18 +51,22 @@ let g:tern_request_timeout = 1
 let g:tern_show_signature_in_pum = 0  " This do disable full signature type on autocomplete
 
 " configure syntastic syntax checking to check on open as well as save
-let g:syntastic_check_on_open=1
-let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute \"ng-"]
-let g:syntastic_eruby_ruby_quiet_messages =
-    \ {"regex": "possibly useless use of a variable in void context"}
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+"let g:syntastic_check_on_open=1
+"let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute \"ng-"]
+"let g:syntastic_eruby_ruby_quiet_messages =
+"    \ {"regex": "possibly useless use of a variable in void context"}
+"set statusline+=%#warningmsg#
+"set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%*
+"
+"let g:syntastic_always_populate_loc_list = 1
+"let g:syntastic_auto_loc_list = 1
+"let g:syntastic_check_on_open = 1
+"let g:syntastic_check_on_wq = 0
 
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
+autocmd! BufWritePost,BufEnter * Neomake
+let g:neomake_javascript_enabled_makers = ['eslint']
+
 
 " Theme
 syntax enable
@@ -135,6 +141,7 @@ autocmd FileType markdown,text,html hi SpellBad guibg=#ff2929 guifg=#ffffff" cte
 "autocmd StdinReadPre * let s:std_in=1
 "autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 map <C-\> :NERDTreeToggle<CR>
+map <A-\> :NERDTreeToggle<CR>
 let g:nerdtree_tabs_autoclose=0
 " with NERDTree don't close all buffers
 " http://stackoverflow.com/questions/31805805/vim-close-buffer-with-nerdtree
@@ -198,6 +205,8 @@ nmap Y y$
 " don't force saving a file to change buffers
 set hidden
 
+"set nocompatible
+"
 " Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
 if executable('ag')
   " Use Ag over Grep
@@ -233,9 +242,15 @@ endif
 :nnoremap <A-j> <C-w>j
 :nnoremap <A-k> <C-w>k
 :nnoremap <A-l> <C-w>l
-:nnoremap <A-Up> <C-w>h
-:nnoremap <A-Down> <C-w>j
 :nnoremap <A-Up> <C-w>k
+:nnoremap <A-Down> <C-w>j
+:nnoremap <D-Left> <C-w>h
+:nnoremap <D-Right> <C-w>l
+:nnoremap <A-Left> <C-w>h
 :nnoremap <A-Right> <C-w>l
 :nmap <A-Left> :bprev<CR>
 :nmap <A-Right> :bnext<CR>
+:nmap <A-h> :bprev<CR>
+:nmap <A-l> :bnext<CR>
+:nmap <D-Left> :bprev<CR>
+:nmap <D-Right> :bnext<CR>
