@@ -67,6 +67,7 @@ tap 'neovim/neovim'
 brew 'neovim'
 brew 'node'
 brew 'python3'
+brew 'hub'
 EOF
 
 pip3 install neovim
