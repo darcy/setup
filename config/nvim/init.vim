@@ -230,7 +230,7 @@ endif
  map <leader>l :Lines<CR>
 
 " Terminal -----------------------
-:tnoremap <Esc> <C-\><C-n>
+" :tnoremap <Esc> <C-\><C-n> - this jacks with fzf closing window
 :tnoremap <A-h> <C-\><C-n><C-w>h
 :tnoremap <A-j> <C-\><C-n><C-w>j
 :tnoremap <A-k> <C-\><C-n><C-w>k
