@@ -20,7 +20,8 @@ if ! command -v brew >/dev/null; then
     curl -fsS \
     'https://raw.githubusercontent.com/Homebrew/install/master/install' | ruby
   else
-    sudo apt-get install -y build-essential curl zsh git git-core python-setuptools ruby
+    # sudo apt-get install -y build-essential curl zsh git git-core python-setuptools ruby
+    sudo yum groupinstall -y 'Development Tools' && sudo yum install -y curl git irb python-setuptools ruby
     ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install)"
   fi
 fi
