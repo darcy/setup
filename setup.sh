@@ -73,6 +73,7 @@ EOF
 
 pip3 install neovim
 npm install -g coffee-script
+npm install -g eslint
 if ! command -v tmuxinator >/dev/null; then
   sudo gem install tmuxinator
 fi
