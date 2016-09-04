@@ -92,6 +92,7 @@ if [ "$(uname)" == "Darwin" ]; then
   tap 'codekitchen/dinghy'
   brew 'dinghy'
   brew 'mackup'
+  brew 'trash'
   cask 'adobe-creative-cloud'
   cask 'atom'
   cask 'dropbox'
