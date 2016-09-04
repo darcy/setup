@@ -33,7 +33,7 @@ alias cds='cd ~/Work/scratch'
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
-
+alias dev='ssh -A -i ~/.ssh/Workstation-west2.pem  ec2-user@dev.darcybrown.com'
 #git
 # alias gm='git merge'
 # alias grm='git rebase master'
