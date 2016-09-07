@@ -73,7 +73,7 @@ pip3 install neovim
 npm install -g coffee-script
 npm install -g eslint
 if ! command -v tmuxinator >/dev/null; then
-  sudo gem install tmuxinator
+  gem install tmuxinator
 fi
 
 mkdir -p ~/Work/client ~/Work/scratch ~/Work/dev
@@ -428,6 +428,11 @@ if [ ! -d "$HOME/.config/nvim/autoload/plug.vim" ]; then
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 fi
 
+if [ ! -d "$HOME/.config/fish/completions/tmuxinator.fish" ]; then
+  curl -fLo ~/.config/fish/completions/tmuxinator.fish --create-dirs \
+    https://raw.githubusercontent.com/tmuxinator/tmuxinator/master/completion/tmuxinator.fish
+fi
+
 # set -e
 # nvim +PlugInstall +qall
 
@@ -439,7 +444,5 @@ fi
   grep -q -F `which fish` /etc/shells || echo `which fish` | sudo tee -a /etc/shells
   chsh -s `which fish`
 # fi
-
-
 
 fancy_echo "All DONE - might need to restart"
