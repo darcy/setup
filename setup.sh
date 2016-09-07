@@ -59,16 +59,14 @@ brew 'direnv'
 brew 'tmux'
 brew 'python'
 brew 'the_silver_searcher'
-brew 'docker'
 brew 'fzf'
 brew 'fish'
-brew 'docker-machine'
-brew 'docker-compose'
 tap 'neovim/neovim'
 brew 'neovim'
 brew 'node'
 brew 'python3'
 brew 'hub'
+brew 'htop'
 EOF
 
 pip3 install neovim
@@ -82,6 +80,9 @@ mkdir -p ~/Work/client ~/Work/scratch ~/Work/dev
 pip install --upgrade pip
 
 if [ "$(uname)" == "Darwin" ]; then
+  brew 'docker'
+  brew 'docker-machine'
+  brew 'docker-compose'
   brew tap caskroom/cask
   brew bundle --file=- <<EOF
   tap 'caskroom/fonts'
