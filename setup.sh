@@ -419,6 +419,9 @@ if [ ! -f "$HOME/.config/fish/functions/fish_prompt.fish" ]; then
   ln -s $HOME/.config/darcy-setup/config/fish/functions/fish_prompt.fish $HOME/.config/fish/functions/fish_prompt.fish
 fi
 
+if [ ! -f "$HOME/.tmux.conf" ]; then
+  ln -s $HOME/.config/darcy-setup/tmux.conf $HOME/.tmux.conf
+fi
 if [ ! -d "$HOME/.config/nvim/autoload/plug.vim" ]; then
   curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
