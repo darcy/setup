@@ -73,6 +73,9 @@ let g:neomake_javascript_enabled_makers = ['eslint']
 syntax enable
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
+if has("termguicolors")
+  set termguicolors
+endif
 colorscheme OceanicNext
 set background=dark
 let g:airline_theme='oceanicnext'
@@ -206,7 +209,24 @@ nmap Y y$
 " don't force saving a file to change buffers
 set hidden
 
+"ctrl-space
 "set nocompatible
+" set showtabline=0
+" if has("gui_running")
+"     " Settings for MacVim and Inconsolata font
+"     let g:CtrlSpaceSymbols = { "File": "◯", "CTab": "▣", "Tabs": "▢" }
+" endif
+" if executable("ag")
+"     let g:CtrlSpaceGlobCommand = 'ag -l --nocolor -g ""'
+" endif
+" hi link CtrlSpaceNormal   PMenu
+" hi link CtrlSpaceSelected PMenuSel
+" hi link CtrlSpaceSearch   Search
+" hi link CtrlSpaceStatus   StatusLine
+" nnoremap <silent><C-p> :CtrlSpace O<CR>
+" let g:CtrlSpaceLoadLastWorkspaceOnStart = 1
+" let g:CtrlSpaceSaveWorkspaceOnSwitch = 1
+" let g:CtrlSpaceSaveWorkspaceOnExit = 1
 "
 " Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
 if executable('ag')
