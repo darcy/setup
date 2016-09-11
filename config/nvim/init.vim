@@ -248,6 +248,7 @@ endif
  vmap <leader>aw y:Ag <C-r>0<CR>
  map <leader>h :History<CR>
  map <leader>l :Lines<CR>
+ map <leader>m :MagitOnly<CR>
 
 " Terminal -----------------------
 " :tnoremap <Esc> <C-\><C-n> - this jacks with fzf closing window

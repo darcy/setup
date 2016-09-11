@@ -34,6 +34,7 @@ alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
 alias dev='ssh -A -i ~/.ssh/Workstation-west2.pem  ec2-user@dev.darcybrown.com'
+alias gitm="nvim -c MagitOnly"
 #git
 # alias gm='git merge'
 # alias grm='git rebase master'
