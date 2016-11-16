@@ -27,6 +27,17 @@ if ! command -v brew >/dev/null; then
   fi
 fi
 
+if ! command -v docker >/dev/null; then
+  if [ "$(uname)" == "Linux" ]; then
+    sudo yum update -y
+    curl -fsSL https://get.docker.com/ | sh
+    sudo systemctl enable docker.service
+    sudo systemctl start docker
+    sudo usermod -aG docker `whoami`
+    sudo systemctl enable docker
+  fi
+fi
+
 if ! command -v zsh >/dev/null; then
   fancy_echo "Installing OhMyZsh ..."
   if [ "$(uname)" == "Darwin" ]; then
