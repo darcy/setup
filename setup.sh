@@ -457,8 +457,10 @@ fi
 #   chsh -s $HOME/.linuxbrew/bin/fish
 # fi
 # if [ -d "$HOME/.linuxbrew/bin/fish" ]; then
+if [ "$(uname)" == "Linux" ]; then
   grep -q -F `which fish` /etc/shells || echo `which fish` | sudo tee -a /etc/shells
-  chsh -s `which fish`
+  grep -q -F 'fish' /etc/passwd || sudo bash -c "chsh -s `which fish` `whoami`"
+fi
 # fi
 
 fancy_echo "All DONE - might need to restart"
