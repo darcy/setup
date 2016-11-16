@@ -42,10 +42,11 @@ fi
 
 fancy_echo "Updating Homebrew formulae ..."
 brew update
+brew update #run twice to fix linuxbrew issues
 brew tap Homebrew/bundle
 set +e
 brew install ruby
-brew install vim --override-system-vi
+brew install vim --with-override-system-vi
 set -e
 brew bundle --file=- <<EOF
 
