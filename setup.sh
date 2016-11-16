@@ -22,6 +22,7 @@ if ! command -v brew >/dev/null; then
   else
     # sudo apt-get install -y build-essential curl zsh git git-core python-setuptools ruby
     sudo yum groupinstall -y 'Development Tools' && sudo yum install -y curl git irb python-setuptools ruby
+    sudo yum install -y gcc-c++ perl-Thread-Queue qperf #fedora requirements
     ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install)"
   fi
 fi
