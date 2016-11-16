@@ -92,6 +92,9 @@ fi
 mkdir -p ~/Work/client ~/Work/scratch ~/Work/dev
 pip install --upgrade pip
 
+if [ "$(uname)" == "Linux" ]; then
+  sudo pip install docker-compose
+fi
 if [ "$(uname)" == "Darwin" ]; then
   brew 'docker'
   brew 'docker-machine'
