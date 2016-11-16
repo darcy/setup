@@ -13,7 +13,7 @@ fancy_echo() {
 }
 
 export PATH="/usr/local/bin:$PATH"
-export PATH="/home/darcy/.linuxbrew/bin:$PATH"
+export PATH="/home/`whoami`/.linuxbrew/bin:$PATH"
 if ! command -v brew >/dev/null; then
   fancy_echo "Installing Homebrew ..."
   if [ "$(uname)" == "Darwin" ]; then
