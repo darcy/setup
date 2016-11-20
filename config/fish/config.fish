@@ -55,6 +55,9 @@ alias gitm="nvim -c MagitOnly"
 # alias gclean='git clean -df'
 # alias gitrmall='git ls-files --deleted | xargs git rm'
 alias git='hub'
+alias dcbup='docker-compose stop; docker-compose build; docker-compose -f docker-compose.yml -f docker-compose.local.yml up'
+alias dcup='docker-compose stop; docker-compose -f docker-compose.yml -f docker-compose.local.yml up'
+alias proxy='docker run -d -p 80:80 -v /var/run/docker.sock:/tmp/docker.sock:ro jwilder/nginx-proxy'
 
 alias sshw='ssh -A 52.9.249.65'
 alias sshfp1n='ssh frontpoint@tm26-s00059  -p 7000'
