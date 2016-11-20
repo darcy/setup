@@ -1,0 +1,53 @@
+[user]
+  email = darcy@darcybrown.com
+  name = Darcy Brown
+[alias]
+  co = checkout
+  pr = pull-request
+[apply]
+  whitespace = nowarn
+[color]
+    branch = auto
+    diff = auto
+    status = auto
+  ui = true
+  [color "branch"]
+    current = yellow reverse
+    local = yellow
+    remote = green
+  [color "diff"]
+    meta = yellow bold
+    frag = magenta bold
+    old = red bold
+    new = green bold
+  [color "status"]
+    added = yellow
+    changed = green
+    untracked = cyan
+[merge]
+  summary = true
+  tool = p4merge
+[github]
+  user = darcy
+[branch]
+  autosetupmerge = true
+  autosetuprebase = always
+[core]
+  editor = vim
+  excludesfile = ~/.gitignore
+  autocrlf = input
+[push]
+  default = current
+[heroku]
+  account = dbcp
+[mergetool]
+  prompt = false
+  keepBackup = false
+[mergetool "p4merge"]
+  path = /usr/local/bin/p4merge
+[diff]
+  tool = vimdiff
+[filter "lfs"]
+  clean = git-lfs clean %f
+  smudge = git-lfs smudge %f
+  required = true

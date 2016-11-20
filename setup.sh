@@ -13,7 +13,7 @@ fancy_echo() {
 }
 
 export PATH="/usr/local/bin:$PATH"
-export PATH="/home/darcy/.linuxbrew/bin:$PATH"
+export PATH="/home/`whoami`/.linuxbrew/bin:$PATH"
 if ! command -v brew >/dev/null; then
   fancy_echo "Installing Homebrew ..."
   if [ "$(uname)" == "Darwin" ]; then
@@ -22,7 +22,19 @@ if ! command -v brew >/dev/null; then
   else
     # sudo apt-get install -y build-essential curl zsh git git-core python-setuptools ruby
     sudo yum groupinstall -y 'Development Tools' && sudo yum install -y curl git irb python-setuptools ruby
+    sudo yum install -y gcc-c++ perl-Thread-Queue gperf zsh #fedora requirements
     ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install)"
+  fi
+fi
+
+if ! command -v docker >/dev/null; then
+  if [ "$(uname)" == "Linux" ]; then
+    sudo yum update -y
+    curl -fsSL https://get.docker.com/ | sh
+    sudo systemctl enable docker.service
+    sudo systemctl start docker
+    sudo usermod -aG docker `whoami`
+    sudo systemctl enable docker
   fi
 fi
 
@@ -42,10 +54,11 @@ fi
 
 fancy_echo "Updating Homebrew formulae ..."
 brew update
+brew update #run twice to fix linuxbrew issues
 brew tap Homebrew/bundle
 set +e
 brew install ruby
-brew install vim --override-system-vi
+brew install vim --with-override-system-vi
 set -e
 brew bundle --file=- <<EOF
 
@@ -79,6 +92,9 @@ fi
 mkdir -p ~/Work/client ~/Work/scratch ~/Work/dev
 pip install --upgrade pip
 
+if [ "$(uname)" == "Linux" ]; then
+  sudo pip install docker-compose
+fi
 if [ "$(uname)" == "Darwin" ]; then
   brew 'docker'
   brew 'docker-machine'
@@ -441,8 +457,10 @@ fi
 #   chsh -s $HOME/.linuxbrew/bin/fish
 # fi
 # if [ -d "$HOME/.linuxbrew/bin/fish" ]; then
+if [ "$(uname)" == "Linux" ]; then
   grep -q -F `which fish` /etc/shells || echo `which fish` | sudo tee -a /etc/shells
-  chsh -s `which fish`
+  grep -q -F 'fish' /etc/passwd || sudo bash -c "chsh -s `which fish` `whoami`"
+fi
 # fi
 
 fancy_echo "All DONE - might need to restart"
