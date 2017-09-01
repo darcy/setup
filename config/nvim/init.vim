@@ -28,6 +28,7 @@ Plug 'kchmck/vim-coffee-script'
 Plug 'vim-ruby/vim-ruby'
 Plug 'mhartington/oceanic-next'
 Plug 'jreybert/vimagit'
+Plug 'exu/pgsql.vim'
 "Plug 'vim-ctrlspace/vim-ctrlspace'
 Plug 'tomtom/tcomment_vim'
 function! DoRemote(arg)
