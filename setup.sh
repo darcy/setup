@@ -134,7 +134,7 @@ if [ "$(uname)" == "Darwin" ]; then
   cask 'vmware-fusion'
 EOF
 
-  cd ~/Library/Fonts && curl -fLo "Inconsolata for Powerline Nerd Font Complete.otf" https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/Inconsolata/complete/Inconsolata%20Nerd%20Font%20Complete.otf
+  cd ~/Library/Fonts && curl -fLo "Inconsolata Nerd Font Complete.otf" https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/Inconsolata/complete/Inconsolata%20Nerd%20Font%20Complete.otf
 
   #source $HOME/.bashrc
 
