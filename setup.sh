@@ -90,15 +90,15 @@ if ! command -v tmuxinator >/dev/null; then
 fi
 
 mkdir -p ~/Work/client ~/Work/scratch ~/Work/dev
-pip install --upgrade pip
 
 if [ "$(uname)" == "Linux" ]; then
+  pip install --upgrade pip
   sudo pip install docker-compose
 fi
 if [ "$(uname)" == "Darwin" ]; then
-  brew 'docker'
-  brew 'docker-machine'
-  brew 'docker-compose'
+  #brew 'docker'
+  #brew 'docker-machine'
+  #brew 'docker-compose'
   brew tap caskroom/cask
   brew bundle --file=- <<EOF
   tap 'caskroom/fonts'
@@ -106,8 +106,8 @@ if [ "$(uname)" == "Darwin" ]; then
   cask 'font-fira-mono'
   cask 'font-fira-code'
 
-  tap 'codekitchen/dinghy'
-  brew 'dinghy'
+  #tap 'codekitchen/dinghy'
+  #brew 'dinghy'
   brew 'mackup'
   brew 'trash'
   cask 'adobe-creative-cloud'
@@ -116,10 +116,10 @@ if [ "$(uname)" == "Darwin" ]; then
   cask 'evernote'
   cask 'flux'
   cask 'fluid'
-  cask 'garmin-basecamp'
-  cask 'github-desktop'
+  #cask 'garmin-basecamp'
+  #cask 'github-desktop'
   cask 'google-chrome'
-  cask 'harvest'
+  #cask 'harvest'
   cask 'ipvanish-vpn'
   cask 'iterm2'
   cask 'lastpass'
@@ -127,14 +127,14 @@ if [ "$(uname)" == "Darwin" ]; then
   cask 'skype'
   cask 'slack'
   cask 'spotify'
-  cask 'screenhero'
+  #cask 'screenhero'
   cask 'spectacle'
-  cask 'sonos'
+  #cask 'sonos'
   cask 'transmit'
   cask 'vmware-fusion'
 EOF
 
-  cd ~/Library/Fonts && curl -fLo "Inconsolata for Powerline Nerd Font Complete.otf" https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/Inconsolata/complete/Inconsolata%20for%20Powerline%20Nerd%20Font%20Complete.otf
+  cd ~/Library/Fonts && curl -fLo "Inconsolata for Powerline Nerd Font Complete.otf" https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/Inconsolata/complete/Inconsolata%20Nerd%20Font%20Complete.otf
 
   #source $HOME/.bashrc
 
@@ -355,12 +355,6 @@ EOF
   defaults write com.evernote.Evernote NSUserKeyEquivalents '{
     "Show Sidebar" = "@\\";
     "Hide Sidebar" = "@\\";
-  }'
-
-  fancy_echo "Set Sidebar Shortcut for Github"
-  defaults write com.github.GitHub NSUserKeyEquivalents '{
-    "Show Repository List" = "@\\";
-    "Hide Repository List" = "@\\";
   }'
 
   fancy_echo "Set Sidebar Shortcut for Calendar"
