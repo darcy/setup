@@ -15,19 +15,26 @@ Packages include:
 
 ## Installation
 
-First, enable net on the template vm for setup, then can disable. In dom0 run:
+In dom0 run:
+
 
 ```
-qvm-prefs --set fedora-26-dev netvm sys-firewall
-```
+cat > ~/update-dev-template.sh <<EOF
+#!/bin/bash
+set -e
 
-```
-sudo yum groupinstall -y 'Development Tools'
-sudo dnf update -y
-curl -s https://raw.githubusercontent.com/darcy/setup/master/qubes/dev-templatevm/setup.sh | sh
-```
+DEV_TEMPLATE=fedora-26-develop
+BASE_TEMPLATE=fedora-26
 
-Now disable netvm
-```
-qvm-prefs --set fedora-26-dev netvm ''
+qvm-ls --raw-list | grep -x $DEV_TEMPLATE || qvm-clone $BASE_TEMPLATE $DEV_TEMPLATE
+qvm-start --skip-if-running $DEV_TEMPLATE
+qvm-prefs --set $DEV_TEMPLATE netvm sys-firewall
+set +e
+qvm-run $DEV_TEMPLATE "curl -s https://raw.githubusercontent.com/darcy/setup/master/qubes/dev-templatevm/setup.sh?$(date +%s) | sh"
+set -e
+qvm-prefs --set $DEV_TEMPLATE netvm ''
+qvm-shutdown $DEV_TEMPLATE
+EOF
+chmod 755 ~/update-dev-template.sh
+./update-dev-template.sh
 ```
