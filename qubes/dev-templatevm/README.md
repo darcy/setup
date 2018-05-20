@@ -30,7 +30,7 @@ qvm-ls --raw-list | grep -x $DEV_TEMPLATE || qvm-clone $BASE_TEMPLATE $DEV_TEMPL
 qvm-start --skip-if-running $DEV_TEMPLATE
 qvm-prefs --set $DEV_TEMPLATE netvm sys-firewall
 set +e
-qvm-run $DEV_TEMPLATE "curl -H 'Cache-Control: no-cache' -s https://raw.githubusercontent.com/darcy/setup/master/qubes/dev-templatevm/setup.sh | sh"
+qvm-run $DEV_TEMPLATE "curl -s https://raw.githubusercontent.com/darcy/setup/master/qubes/dev-templatevm/setup.sh?$(date +%s) | sh"
 set -e
 qvm-prefs --set $DEV_TEMPLATE netvm ''
 qvm-shutdown $DEV_TEMPLATE

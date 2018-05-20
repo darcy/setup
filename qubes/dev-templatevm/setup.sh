@@ -11,14 +11,18 @@ sudo dnf install -y curl wget git irb python-setuptools ruby zsh tmux htop node 
 sudo pip install --upgrade pip
 #sudo pip install neovim
 sudo npm install -g coffee-script eslint
-curl -fsSL https://get.docker.com/ | sh
+[ -f /usr/bin/docker ] || \
+  (curl -fsSL https://get.docker.com/ | sh)
 #sudo systemctl enable docker.service
 sudo usermod -aG docker user
 #sudo systemctl start docker
 sudo pip install docker-compose --upgrade --user
 sudo pip install awscli --upgrade --user
-curl -L http://get.oh-my.fish > install; fish install --noninteractive; rm -f install
-sudo mkdir -p /usr/share/fonts/inconsolata && cd /usr/share/fonts/inconsolata && \
-  sudo wget https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/Inconsolata/complete/Inconsolata%20Nerd%20Font%20Complete.otf
-sudo fc-cache -s
+[ -d /home/user/.local/share/omf ] || \
+  (curl -L http://get.oh-my.fish > install; fish install --noninteractive; rm -f install)
+[ -d /usr/share/fonts/inconsolata ] || \
+  (sudo mkdir -p /usr/share/fonts/inconsolata && cd /usr/share/fonts/inconsolata && \
+  sudo wget https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/Inconsolata/complete/Inconsolata%20Nerd%20Font%20Complete.otf && \
+  sudo fc-cache -s)
+grep -q -F 'fish' /etc/passwd || sudo bash -c "chsh -s `which fish` user"
 
