@@ -421,17 +421,17 @@ if [ ! -d "$HOME/.config/darcy-setup" ]; then
   git clone git://github.com/darcy/setup.git $HOME/.config/darcy-setup
 fi
 if [ ! -f "$HOME/.config/nvim/init.vim" ]; then
-  ln -s $HOME/.config/darcy-setup/config/nvim/init.vim $HOME/.config/nvim/init.vim
+  ln -s $HOME/.config/darcy-setup/common/config/nvim/init.vim $HOME/.config/nvim/init.vim
 fi
 if [ ! -f "$HOME/.config/fish/config.fish" ]; then
-  ln -s $HOME/.config/darcy-setup/config/fish/config.fish $HOME/.config/fish/config.fish
+  ln -s $HOME/.config/darcy-setup/common/config/fish/config.fish $HOME/.config/fish/config.fish
 fi
 if [ ! -f "$HOME/.config/fish/functions/fish_prompt.fish" ]; then
   ln -s $HOME/.config/darcy-setup/config/fish/functions/fish_prompt.fish $HOME/.config/fish/functions/fish_prompt.fish
 fi
 
 if [ ! -f "$HOME/.tmux.conf" ]; then
-  ln -s $HOME/.config/darcy-setup/tmux.conf $HOME/.tmux.conf
+  ln -s $HOME/.config/darcy-setup/common/tmux.conf $HOME/.tmux.conf
 fi
 if [ ! -d "$HOME/.config/nvim/autoload/plug.vim" ]; then
   curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs \

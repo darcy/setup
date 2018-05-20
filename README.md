@@ -1,7 +1,4 @@
-# Install
+# Development config scripts
 
-```
-curl -s https://raw.githubusercontent.com/darcy/setup/master/setup.sh | sh
-```
-
+Mac OS X and Qubes OS setup and config scripts
 

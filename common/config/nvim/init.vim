@@ -10,10 +10,11 @@ Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-jdaddy'
-Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+Plug 'tomlion/vim-solidity'
+"Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 "Plug 'scrooloose/syntastic'
 Plug 'neomake/neomake'
-Plug 'Xuyuanp/nerdtree-git-plugin'
+"Plug 'Xuyuanp/nerdtree-git-plugin'
 "Plug 'rking/ag.vim'
 "Plug 'ctrlpvim/ctrlp.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -24,6 +25,8 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'airblade/vim-gitgutter'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'pangloss/vim-javascript'
+"Plug 'neoclide/vim-jsx-improve'
+Plug 'mxw/vim-jsx'
 Plug 'kchmck/vim-coffee-script'
 Plug 'vim-ruby/vim-ruby'
 Plug 'mhartington/oceanic-next'
@@ -147,13 +150,14 @@ autocmd FileType markdown,text,html hi SpellBad guibg=#ff2929 guifg=#ffffff" cte
 "autocmd StdinReadPre * let s:std_in=1
 "autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 map <C-\> :NERDTreeToggle<CR>
-map <A-\> :NERDTreeToggle<CR>
+map <S-\> :NERDTreeToggle<CR>
 let g:nerdtree_tabs_autoclose=0
 " with NERDTree don't close all buffers
 " http://stackoverflow.com/questions/31805805/vim-close-buffer-with-nerdtree
 " nnoremap c :bp\|bd #<CR>
 " shift-w to close current buffer
 " nmap <S-w> :bd<CR>
+" nmap <S-w> :bp\|bd #<CR>
 nmap <A-w> :bp\|bd #<CR>
 " close NERDtree if last thing open
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
@@ -192,7 +196,7 @@ hi CursorLine term=bold cterm=bold guibg=Grey20
 
 
 " move tabs to the end for new, single buffers (exclude splits)
-autocmd BufNew * if winnr('$') == 1 | tabmove99 | endif
+" autocmd BufNew * if winnr('$') == 1 | tabmove99 | endif
 
 " trim whitespace on close for filetypes
 "autocmd FileType rb,js,erb,html,css autocmd BufWritePre <buffer> :%s/\s\+$//e
@@ -278,3 +282,12 @@ endif
 :nmap <A-l> :bnext<CR>
 :nmap <D-Left> :bprev<CR>
 :nmap <D-Right> :bnext<CR>
+
+:map <C-h> <C-w>h
+:map <C-j> <C-w>j
+:map <C-k> <C-w>k
+:map <C-l> <C-w>l
+
+let g:fzf_action = {
+  \ 'ctrl-v': 'vsplit' }
+
