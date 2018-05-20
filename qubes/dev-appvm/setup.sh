@@ -5,9 +5,11 @@ set -e
 HOME=/home/user
 FROM=/home/user/setup/common
 
-mkdir -p $HOME/.config/nvim/autoload $HOME/.config/fish/functions $HOME/.config/fish/completions
+# mkdir -p $HOME/.config/nvim/autoload $HOME/.config/fish/functions $HOME/.config/fish/completions
 mkdir -p $HOME/Work/client $HOME/Work/dev $HOME/Work/scratch
-sudo chown -R user:user $HOME
+sudo chown user:user $HOME/Work/client
+sudo chown user:user $HOME/Work/dev
+sudo chown user:user $HOME/Work/scratch
 
 [ -f $HOME/.config/nvim/autoload/plug.vim ] || \
   curl -fLo $HOME/.config/nvim/autoload/plug.vim --create-dirs \
@@ -15,6 +17,8 @@ sudo chown -R user:user $HOME
 [ -f $HOME/.config/fish/functions/fisher.fish ] || \
   curl -fLo $HOME/config/fish/functions/fisher.fish --create-dirs \
     https://git.io/fisher
+[ -f $HOME/.tmux/plugins/tpm ] || \
+  git clone https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
 
 ln -nsf $FROM/gitconfig $HOME/.gitconfig
 ln -nsf $FROM/tmux.conf $HOME/.tmux.conf
