@@ -7,7 +7,7 @@ sudo dnf config-manager --add-repo http://download.opensuse.org/repositories/she
 #sudo dnf -y copr enable dperson/neovim
 sudo dnf install -y curl wget git irb python-setuptools ruby zsh tmux htop node npm the_silver_searcher \
   gcc-c++ perl-Thread-Queue gperf go go-md2man hub python3 dnf-plugins-core neovim fish direnv \
-  util-linux-user tmuxinator fzf
+  util-linux-user tmuxinator fzf xclip
 sudo pip install --upgrade pip
 #sudo pip install neovim
 sudo npm install -g coffee-script eslint
