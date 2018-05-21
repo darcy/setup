@@ -6,11 +6,15 @@ Plug 'VundleVim/Vundle.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-rails'
-Plug 'tpope/vim-vinegar'
+"Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
+" Plug 'tpope/vim-projectionist'
 Plug 'tpope/vim-jdaddy'
 Plug 'tomlion/vim-solidity'
+Plug 'justinmk/vim-dirvish'
+Plug 'kristijanhusak/vim-dirvish-git'
+" Plug 'fsharpasharp/vim-dirvinist'
 "Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 "Plug 'scrooloose/syntastic'
 Plug 'neomake/neomake'
@@ -82,7 +86,7 @@ if has("termguicolors")
   set termguicolors
 endif
 colorscheme OceanicNext
-set background=dark
+" set background=dark
 let g:airline_theme='oceanicnext'
 let g:airline#extensions#tabline#enabled = 1
 " colorscheme onedark
@@ -145,51 +149,52 @@ autocmd FileType markdown,text,html setlocal spell complete+=kspell
 " highlight bad words in red
 autocmd FileType markdown,text,html hi SpellBad guibg=#ff2929 guifg=#ffffff" ctermbg=224
 
-" NERDTree --------------------------------------------
-"
-"autocmd StdinReadPre * let s:std_in=1
-"autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-map <C-\> :NERDTreeToggle<CR>
-map <S-\> :NERDTreeToggle<CR>
-let g:nerdtree_tabs_autoclose=0
-" with NERDTree don't close all buffers
-" http://stackoverflow.com/questions/31805805/vim-close-buffer-with-nerdtree
-" nnoremap c :bp\|bd #<CR>
-" shift-w to close current buffer
-" nmap <S-w> :bd<CR>
-" nmap <S-w> :bp\|bd #<CR>
-nmap <A-w> :bp\|bd #<CR>
-" close NERDtree if last thing open
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-let g:NERDTreeAutoDeleteBuffer=1
-  " NERDTress File highlighting
-  function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
-  exec 'autocmd FileType nerdtree highlight ' . a:extension .' ctermbg='. a:bg .' ctermfg='. a:fg .' guibg='. a:guibg .' guifg='. a:guifg
-  exec 'autocmd FileType nerdtree syn match ' . a:extension .' #^\s\+.*'. a:extension .'$#'
-  endfunction
-" let NERDTreeShowHidden=1
-  call NERDTreeHighlightFile('jade', 'green', 'none', 'green', 'none')
-  call NERDTreeHighlightFile('md', 'blue', 'none', '#6699CC', 'none')
-  call NERDTreeHighlightFile('config', 'yellow', 'none', '#d8a235', 'none')
-  call NERDTreeHighlightFile('yml', 'yellow', 'none', '#d8a235', 'none')
-  call NERDTreeHighlightFile('conf', 'yellow', 'none', '#d8a235', 'none')
-  call NERDTreeHighlightFile('json', 'green', 'none', '#d8a235', 'none')
-  call NERDTreeHighlightFile('html', 'yellow', 'none', '#d8a235', 'none')
-  call NERDTreeHighlightFile('erb', 'yellow', 'none', '#d8a235', 'none')
-  call NERDTreeHighlightFile('rb', 'green', 'none', '#94B9A0', 'none')
-  call NERDTreeHighlightFile('css', 'cyan', 'none', '#5486C0', 'none')
-  call NERDTreeHighlightFile('scss', 'cyan', 'none', '#5486C0', 'none')
-  call NERDTreeHighlightFile('coffee', 'Red', 'none', 'red', 'none')
-  call NERDTreeHighlightFile('js', 'Red', 'none', '#ffa500', 'none')
-  call NERDTreeHighlightFile('ts', 'Blue', 'none', '#6699cc', 'none')
-  call NERDTreeHighlightFile('ds_store', 'Gray', 'none', '#686868', 'none')
-  call NERDTreeHighlightFile('gitconfig', 'black', 'none', '#686868', 'none')
-  call NERDTreeHighlightFile('gitignore', 'Gray', 'none', '#7F7F7F', 'none')
+" " NERDTree --------------------------------------------
+" "
+" "autocmd StdinReadPre * let s:std_in=1
+""  autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+" map <C-\> :NERDTreeToggle<CR>
+" map <S-\> :NERDTreeToggle<CR>
+" let g:nerdtree_tabs_autoclose=0
+" " with NERDTree don't close all buffers
+" " http://stackoverflow.com/questions/31805805/vim-close-buffer-with-nerdtree
+" " nnoremap c :bp\|bd #<CR>
+" " shift-w to close current buffer
+" " nmap <S-w> :bd<CR>
+" " nmap <S-w> :bp\|bd #<CR>
+" " close NERDtree if last thing open
+" autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+" let g:NERDTreeAutoDeleteBuffer=1
+"   " NERDTress File highlighting
+"   function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
+"   exec 'autocmd FileType nerdtree highlight ' . a:extension .' ctermbg='. a:bg .' ctermfg='. a:fg .' guibg='. a:guibg .' guifg='. a:guifg
+"   exec 'autocmd FileType nerdtree syn match ' . a:extension .' #^\s\+.*'. a:extension .'$#'
+"   endfunction
+" " let NERDTreeShowHidden=1
+"   call NERDTreeHighlightFile('jade', 'green', 'none', 'green', 'none')
+"   call NERDTreeHighlightFile('md', 'blue', 'none', '#6699CC', 'none')
+"   call NERDTreeHighlightFile('config', 'yellow', 'none', '#d8a235', 'none')
+"   call NERDTreeHighlightFile('yml', 'yellow', 'none', '#d8a235', 'none')
+"   call NERDTreeHighlightFile('conf', 'yellow', 'none', '#d8a235', 'none')
+"   call NERDTreeHighlightFile('json', 'green', 'none', '#d8a235', 'none')
+"   call NERDTreeHighlightFile('html', 'yellow', 'none', '#d8a235', 'none')
+"   call NERDTreeHighlightFile('erb', 'yellow', 'none', '#d8a235', 'none')
+"   call NERDTreeHighlightFile('rb', 'green', 'none', '#94B9A0', 'none')
+"   call NERDTreeHighlightFile('css', 'cyan', 'none', '#5486C0', 'none')
+"   call NERDTreeHighlightFile('scss', 'cyan', 'none', '#5486C0', 'none')
+"   call NERDTreeHighlightFile('coffee', 'Red', 'none', 'red', 'none')
+"   call NERDTreeHighlightFile('js', 'Red', 'none', '#ffa500', 'none')
+"   call NERDTreeHighlightFile('ts', 'Blue', 'none', '#6699cc', 'none')
+"   call NERDTreeHighlightFile('ds_store', 'Gray', 'none', '#686868', 'none')
+"   call NERDTreeHighlightFile('gitconfig', 'black', 'none', '#686868', 'none')
+"   call NERDTreeHighlightFile('gitignore', 'Gray', 'none', '#7F7F7F', 'none')
 
 "}}}
 
 " Trigger filesystem notifications so guard picks up
 set noswapfile
+
+nmap <A-w> :bp\|bd #<CR>
 
 set cursorline
 hi CursorLine term=bold cterm=bold guibg=Grey20
@@ -288,6 +293,38 @@ endif
 :map <C-k> <C-w>k
 :map <C-l> <C-w>l
 
+" fugitive git bindings
+set diffopt=filler,vertical
+nnoremap <leader>gl :silent! Glog<CR>:bot copen<CR>
+nnoremap <leader>gb :Gblame<CR>
+"nnoremap <leader>ga :Git add %:p<CR><CR>
+"nnoremap <leader>gs :Gstatus<CR>
+"nnoremap <leader>gc :Gcommit -v -q<CR>
+"nnoremap <leader>gt :Gcommit -v -q %:p<CR>
+"nnoremap <leader>gd :Gdiff<CR>
+"nnoremap <leader>ge :Gedit<CR>
+"nnoremap <leader>gr :Gread<CR>
+"nnoremap <leader>gw :Gwrite<CR><CR>
+"nnoremap <leader>gp :Ggrep<Space>
+"nnoremap <leader>gm :Gmove<Space>
+"nnoremap <leader>gb :Git branch<Space>
+"nnoremap <leader>go :Git checkout<Space>
+"nnoremap <leader>gps :Dispatch! git push<CR>
+"nnoremap <leader>gpl :Dispatch! git pull<CR>
+
 let g:fzf_action = {
   \ 'ctrl-v': 'vsplit' }
 
+let g:loaded_netrwPlugin = 1
+
+hi DirvishGitModified guifg=#A3BE8C
+hi DirvishGitUntracked guifg=#A4BE8C
+"hi DirvishGitUntrackedDir guifg=#A4BE8C
+" hi DirvishGitStaged guifg=#A3BE8C
+" hi DirvishGitRenamed guifg=#EBCB8B
+" hi DirvishGitUnmerged guifg=#BF616A
+hi DirvishGitDeleted guifg=#BF616A
+" hi DirvishGitIgnored guifg=NONE guibg=NONE gui=NONE cterm=NONE ctermfg=NONE ctermbg=NONE
+" hi DirvishGitUntracked guifg=NONE guibg=NONE gui=NONE cterm=NONE ctermfg=NONE ctermbg=NONE
+" " Untracked dir linked to Dirvish dir color
+" hi link DirvishGitUntrackedDir DirvishPathTail
