@@ -29,9 +29,7 @@ BASE_TEMPLATE=fedora-26
 qvm-ls --raw-list | grep -x $DEV_TEMPLATE || qvm-clone $BASE_TEMPLATE $DEV_TEMPLATE
 qvm-start --skip-if-running $DEV_TEMPLATE
 qvm-prefs --set $DEV_TEMPLATE netvm sys-firewall
-set +e
-qvm-run $DEV_TEMPLATE "curl -s https://raw.githubusercontent.com/darcy/setup/master/qubes/dev-templatevm/setup.sh?$(date +%s) | sh"
-set -e
+qvm-run --pass-io $DEV_TEMPLATE "curl -s https://raw.githubusercontent.com/darcy/setup/master/qubes/dev-templatevm/setup.sh?$(date +%s) | sh"
 qvm-prefs --set $DEV_TEMPLATE netvm ''
 qvm-shutdown $DEV_TEMPLATE
 EOF
