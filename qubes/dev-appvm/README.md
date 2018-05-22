@@ -11,8 +11,8 @@
 ```
 ssh-keygen -t rsa -b 4096 -C "darcy@darcybrown.com"
 [add new key to github]
-git clone git@github:darcy/setup.git
+git clone git@github.com:darcy/setup.git
 sudo ln -nsf ~/setup/qubes/dev-appvm/rc.local /rw/config/rc.local
-sudo /rc/config/rc.local
+sudo /rw/config/rc.local
 ```
 
