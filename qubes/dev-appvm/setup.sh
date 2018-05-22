@@ -5,19 +5,28 @@ set -e
 HOME=/home/user
 FROM=/home/user/setup/common
 
-# mkdir -p $HOME/.config/nvim/autoload $HOME/.config/fish/functions $HOME/.config/fish/completions
-mkdir -p $HOME/Work/client $HOME/Work/dev $HOME/Work/scratch
-sudo chown user:user $HOME/Work/client
-sudo chown user:user $HOME/Work/dev
-sudo chown user:user $HOME/Work/scratch
+mkdir -p $HOME/.config/nvim/autoload \
+  $HOME/.config/fish/functions \
+  $HOME/.config/fish/completions \
+  $HOME/Work/client \
+  $HOME/Work/dev \
+  $HOME/Work/scratch
+sudo chown user:user $HOME/.config/nvim \
+  $HOME/.config/nvim/autoload \
+  $HOME/.config/fish \
+  $HOME/.config/fish/functions \
+  $HOME/.config/fish/completions \
+  $HOME/Work/client \
+  $HOME/Work/dev \
+  $HOME/Work/scratch
 
 [ -f $HOME/.config/nvim/autoload/plug.vim ] || \
   curl -fLo $HOME/.config/nvim/autoload/plug.vim --create-dirs \
-    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 [ -f $HOME/.config/fish/functions/fisher.fish ] || \
-  curl -fLo $HOME/config/fish/functions/fisher.fish --create-dirs \
-    https://git.io/fisher
-[ -f $HOME/.tmux/plugins/tpm ] || \
+  curl -fLo $HOME/.config/fish/functions/fisher.fish --create-dirs \
+  https://git.io/fisher
+[ -d $HOME/.tmux/plugins/tpm ] || \
   git clone https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
 
 ln -nsf $FROM/gitconfig $HOME/.gitconfig
