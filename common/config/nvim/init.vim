@@ -33,11 +33,19 @@ Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
 Plug 'kchmck/vim-coffee-script'
 Plug 'vim-ruby/vim-ruby'
-Plug 'mhartington/oceanic-next'
 Plug 'jreybert/vimagit'
 Plug 'exu/pgsql.vim'
 "Plug 'vim-ctrlspace/vim-ctrlspace'
 Plug 'tomtom/tcomment_vim'
+
+" colorschemes
+Plug 'mhartington/oceanic-next'
+Plug 'mhinz/vim-janah'
+Plug 'w0ng/vim-hybrid'
+Plug 'joshdick/onedark.vim'
+Plug 'dracula/vim', { 'as': 'dracula' }
+Plug 'jnurmine/Zenburn'
+
 function! DoRemote(arg)
   UpdateRemotePlugins
 endfunction
@@ -85,8 +93,39 @@ let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 if has("termguicolors")
   set termguicolors
 endif
-colorscheme OceanicNext
-" set background=dark
+
+set cursorline
+"janah
+  autocmd ColorScheme janah highlight Normal ctermbg=150
+  set background=dark
+  colorscheme OceanicNext
+  colorscheme janah
+  " highlight DiffDelete guifg=#ec5f67 ctermfg=203 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
+  " highlight DiffAdd guifg=#87ff5f ctermfg=114 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
+  " highlight DiffChange guifg=#65737e ctermfg=243 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
+  " highlight DiffText guifg=#6699cc ctermfg=68 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
+
+"
+" oceanic
+"
+" hybrid
+  " let g:hybrid_custom_term_colors = 1
+"   let g:hybrid_reduced_contrast = 1 " Remove this line if using the default palette.
+"  set background=dark
+"  colorscheme hybrid
+"
+" onedark
+"  set background=dark
+"  colorscheme onedark
+
+
+" " dracula
+" colors dracula
+
+" zenburn
+" colors zenburn
+
+
 let g:airline_theme='oceanicnext'
 let g:airline#extensions#tabline#enabled = 1
 " colorscheme onedark
@@ -130,14 +169,15 @@ let g:airline#extensions#tabline#enabled = 1
   map q <Nop>
 
 nnoremap ; :
+
 " Copy to osx clipboard
-  vnoremap <C-c> "*y<CR>
-  vnoremap y "*y<CR>
-  nnoremap Y "*Y<CR>
-  let g:multi_cursor_next_key='<C-n>'
-  let g:multi_cursor_prev_key='<C-p>'
-  let g:multi_cursor_skip_key='<C-x>'
-  let g:multi_cursor_quit_key='<Esc>'
+  " vnoremap <C-c> "*y<CR>
+  " vnoremap y "*y<CR>
+  " nnoremap Y "*Y<CR>
+  " let g:multi_cursor_next_key='<c-n>'
+  " let g:multi_cursor_prev_key='<c-p>'
+  " let g:multi_cursor_skip_key='<c-x>'
+  " let g:multi_cursor_quit_key='<esc>'
 
 " Align blocks of text and keep them selected
   vmap < <gv
@@ -192,12 +232,9 @@ autocmd FileType markdown,text,html hi SpellBad guibg=#ff2929 guifg=#ffffff" cte
 "}}}
 
 " Trigger filesystem notifications so guard picks up
-set noswapfile
+" set noswapfile
 
 nmap <A-w> :bp\|bd #<CR>
-
-set cursorline
-hi CursorLine term=bold cterm=bold guibg=Grey20
 
 
 " move tabs to the end for new, single buffers (exclude splits)
@@ -328,3 +365,9 @@ hi DirvishGitDeleted guifg=#BF616A
 " hi DirvishGitUntracked guifg=NONE guibg=NONE gui=NONE cterm=NONE ctermfg=NONE ctermbg=NONE
 " " Untracked dir linked to Dirvish dir color
 " hi link DirvishGitUntrackedDir DirvishPathTail
+
+" allows incsearch highlighting for range commands
+set nohlsearch
+cnoremap $t <CR>:t''<CR>
+cnoremap $m <CR>:m''<CR>
+cnoremap $d <CR>:d<CR>``
