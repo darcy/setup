@@ -30,6 +30,7 @@ sudo chown user:user $HOME/.config/nvim \
   git clone https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
 
 ln -nsf $FROM/gitconfig $HOME/.gitconfig
+ln -nsf $FROM/gitignore $HOME/.gitignore
 ln -nsf $FROM/tmux.conf $HOME/.tmux.conf
 ln -nsf $FROM/config/nvim/init.vim $HOME/.config/nvim/init.vim
 ln -nsf $FROM/config/fish/config.fish $HOME/.config/fish/config.fish
