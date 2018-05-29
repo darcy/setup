@@ -34,6 +34,13 @@ sudo pip3 install --upgrade neovim
   sudo wget https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/Inconsolata/complete/Inconsolata%20Nerd%20Font%20Complete.otf && \
   sudo fc-cache -s)
 
+# install snap
+sudo dnf install -y snapd
+sudo ln -s /var/lib/snapd/snap /snap
+sudo snap install htop gimp hello
+sudo snap install --classic slack
+sudo snap refresh
+
 sudo npm install -g coffee-script eslint
 
 # change to fish shell

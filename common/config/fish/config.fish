@@ -14,6 +14,9 @@ end
 if test -d $HOME/.linuxbrew
   set -gx PATH $HOME/.linuxbrew/bin $PATH
 end
+if test -d /var/lib/snapd/snap/bin
+  set -gx PATH /var/lib/snapd/snap/bin $PATH
+end
 
 export LC_CTYPE=en_US.UTF-8
 # export TERM=xterm-256color
