@@ -7,7 +7,7 @@ sudo dnf config-manager --add-repo http://download.opensuse.org/repositories/she
 
 sudo dnf install -y curl wget git irb python-setuptools ruby zsh tmux htop node npm the_silver_searcher \
   gcc-c++ perl-Thread-Queue gperf go go-md2man hub python3 dnf-plugins-core neovim fish direnv \
-  util-linux-user tmuxinator fzf xclip bind-utils
+  util-linux-user tmuxinator fzf xclip bind-utils weechat
 
 # verify pip is up to date
 [ -f /usr/bin/pip3 ] || \
@@ -27,6 +27,9 @@ sudo pip3 install awscli --upgrade
 
 # setup neovim with python for fzf
 sudo pip3 install --upgrade neovim
+
+# websocket for weechat
+sudo pip2 install websocket-client
 
 # install fonts
 [ -d /usr/share/fonts/inconsolata ] || \
