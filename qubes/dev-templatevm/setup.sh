@@ -21,7 +21,7 @@ sudo usermod -aG docker user
 sudo pip3 install docker-compose --upgrade
 
 # add aws cli for good measure
-sudo pip3 install awscli --upgrade
+sudo pip3 install awscli --upgrade --ignore-installed
 [ -d /home/user/.local/share/omf ] || \
   (curl -L http://get.oh-my.fish > install; fish install --noninteractive; rm -f install)
 
