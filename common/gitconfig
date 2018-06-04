@@ -4,6 +4,7 @@
 [alias]
   co = checkout
   pr = pull-request
+  edit = !$EDITOR $(git status --short | awk '$1 ~ /^M|A|U/ {print $2}' )
 [apply]
   whitespace = nowarn
 [color]
