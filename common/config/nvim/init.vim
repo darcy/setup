@@ -330,11 +330,11 @@ endif
 :map <C-k> <C-w>k
 :map <C-l> <C-w>l
 
-noremap <Up> <Nop>
-noremap <Down> <Nop>
-noremap <Left> <Nop>
-noremap <Right> <Nop>
-
+" noremap <Up> <Nop>
+" noremap <Down> <Nop>
+" noremap <Left> <Nop>
+" noremap <Right> <Nop>
+"
 " fugitive git bindings
 set diffopt=filler,vertical
 nnoremap <leader>gl :silent! Glog<CR>:bot copen<CR>
