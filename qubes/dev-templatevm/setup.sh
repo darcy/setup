@@ -9,6 +9,12 @@ sudo dnf install -y curl wget git irb python-setuptools ruby zsh tmux htop node 
   gcc-c++ perl-Thread-Queue gperf go go-md2man hub python3 dnf-plugins-core neovim fish direnv \
   util-linux-user tmuxinator fzf xclip bind-utils weechat
 
+#h264
+sudo dnf config-manager --set-enabled rpmfusion-free rpmfusion-nonfree
+sudo dnf upgrade --refresh -y
+sudo dnf install ffmpeg-libs -y
+# sudo dnf install compat-ffmpeg28 fedora28
+
 # verify pip is up to date
 [ -f /usr/bin/pip3 ] || \
   sudo dnf reinstall -y python3-pip
