@@ -46,7 +46,7 @@ sudo pip3 install awscli --upgrade --ignore-installed
 
 # install snap
 sudo dnf install -y snapd
-sudo ln -s /var/lib/snapd/snap /snap
+sudo ln -nfs /var/lib/snapd/snap /snap
 sudo snap install htop gimp hello
 sudo snap install --classic slack
 sudo snap refresh
