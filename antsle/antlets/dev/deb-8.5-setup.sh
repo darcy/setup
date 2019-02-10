@@ -27,7 +27,7 @@ rm -rf Python*
 # install node
 curl -sl https://deb.nodesource.com/setup_10.x | sudo bash -
 apt-get install -y nodejs
-npm install -g coffeescript eslint localtunnel eslint-prettier eslint-plugin-prettier babel-eslint eslint-config-prettier \
+npm install -g coffeescript eslint localtunnel eslint-plugin-prettier babel-eslint eslint-config-prettier \
         eslint-config-airbnb eslint-plugin-jsx-a11y eslint-plugin-react eslint-plugin-import prettier
 
 # install ruby
