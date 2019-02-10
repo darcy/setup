@@ -59,7 +59,7 @@ pip3 install --upgrade neovim
 #[ -f /usr/bin/docker ] || \
 #  (curl -fsSL https://get.docker.com/ | sh)
 curl -fsSL https://download.docker.com/linux/debian/gpg | sudo apt-key add -
-apt-get install -y docker-ce=17.12.1~ce-0~debian
+apt-get install -y docker-ce=17.09.1~ce-0~debian
 pip3 install docker-compose --upgrade
 
 # add aws cli for good measure
