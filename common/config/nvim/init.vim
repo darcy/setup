@@ -142,7 +142,9 @@ let g:airline#extensions#tabline#enabled = 1
 " Let airline tell me my status
   set noshowmode
   filetype on
-  set relativenumber number
+  "set relativenumber number
+  set number
+  set numberwidth=3
   set tabstop=2 shiftwidth=2 expandtab
   set conceallevel=0
 " block select not limited by shortest line
