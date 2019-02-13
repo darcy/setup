@@ -236,7 +236,8 @@ autocmd FileType markdown,text,html hi SpellBad guibg=#ff2929 guifg=#ffffff" cte
 " Trigger filesystem notifications so guard picks up
 " set noswapfile
 
-nmap <A-w> :bp\|bd #<CR>
+" nmap <A-w> :bp\|bd #<CR>
+nmap <expr> <silent> <A-w> len(filter(range(1, bufnr('$')), 'buflisted(v:val)')) == 1 ? ':bd<CR>' : ':bp<CR>:bd #<CR>'
 
 
 " move tabs to the end for new, single buffers (exclude splits)
