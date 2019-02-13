@@ -379,3 +379,8 @@ set nohlsearch
 cnoremap $t <CR>:t''<CR>
 cnoremap $m <CR>:m''<CR>
 cnoremap $d <CR>:d<CR>``
+
+inoremap <esc> NO ESCAPE FOR YOU
+inoremap jk <esc>
+inoremap jj <esc>
+inoremap kj <esc>
