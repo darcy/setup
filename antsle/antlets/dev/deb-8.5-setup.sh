@@ -14,8 +14,13 @@ usermod -aG sudo user
 
 apt-get install -y build-essential
 
-apt-get install -y git python-setuptools zsh tmux htop silversearcher-ag \
+apt-get install -y git python-setuptools zsh htop silversearcher-ag \
         direnv python3 python3-pip gperf xclip file fish gawk golang-go
+
+# newer tmux
+echo 'deb http://ftp.debian.org/debian jessie-backports main' >> /etc/apt/sources.list
+apt-get update
+apt-get -t jessie-backports install -y tmux
 
 #upgrade python
 wget https://www.python.org/ftp/python/3.6.3/Python-3.6.3.tgz
