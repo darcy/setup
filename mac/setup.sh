@@ -13,43 +13,9 @@ fancy_echo() {
 }
 
 export PATH="/usr/local/bin:$PATH"
-export PATH="/home/`whoami`/.linuxbrew/bin:$PATH"
 if ! command -v brew >/dev/null; then
   fancy_echo "Installing Homebrew ..."
-  if [ "$(uname)" == "Darwin" ]; then
-    curl -fsS \
-    'https://raw.githubusercontent.com/Homebrew/install/master/install' | ruby
-  else
-    # sudo apt-get install -y build-essential curl zsh git git-core python-setuptools ruby
-    sudo yum groupinstall -y 'Development Tools' && sudo yum install -y curl git irb python-setuptools ruby
-    sudo yum install -y gcc-c++ perl-Thread-Queue gperf zsh #fedora requirements
-    ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install)"
-  fi
-fi
-
-if ! command -v docker >/dev/null; then
-  if [ "$(uname)" == "Linux" ]; then
-    sudo yum update -y
-    curl -fsSL https://get.docker.com/ | sh
-    sudo systemctl enable docker.service
-    sudo systemctl start docker
-    sudo usermod -aG docker `whoami`
-    sudo systemctl enable docker
-  fi
-fi
-
-if ! command -v zsh >/dev/null; then
-  fancy_echo "Installing OhMyZsh ..."
-  if [ "$(uname)" == "Darwin" ]; then
-    sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-  else
-    wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | zsh
-  fi
-fi
-
-if [ -d "$HOME/Dropbox/Mackup" ]; then
-  fancy_echo "Updating from mackup"
-  #mackup restore
+  curl -fsS 'https://raw.githubusercontent.com/Homebrew/install/master/install' | ruby
 fi
 
 fancy_echo "Updating Homebrew formulae ..."
@@ -58,15 +24,12 @@ brew update #run twice to fix linuxbrew issues
 brew tap Homebrew/bundle
 set +e
 brew install ruby
-brew install vim --with-override-system-vi
+brew install vim
 set -e
 brew bundle --file=- <<EOF
 
 brew "git"
 brew "awscli"
-brew "heroku-toolbelt"
-brew "imagemagick"
-brew 's3cmd'
 brew 'wget'
 brew 'direnv'
 brew 'tmux'
@@ -80,61 +43,26 @@ brew 'node'
 brew 'python3'
 brew 'hub'
 brew 'htop'
+brew 'docker'
+brew 'docker-machine'
+brew 'docker-compose'
+tap 'codekitchen/dinghy'
+brew 'dinghy'
+brew docker-machine-driver-xhyve
 EOF
+sudo chown root:wheel $(brew --prefix)/opt/docker-machine-driver-xhyve/bin/docker-machine-driver-xhyve
+sudo chmod u+s $(brew --prefix)/opt/docker-machine-driver-xhyve/bin/docker-machine-driver-xhyve
+dinghy create --memory=12288 --cpus=3 --disk=100000 --provider=xhyve
 
 pip3 install neovim
 npm install -g coffee-script
 npm install -g eslint
-if ! command -v tmuxinator >/dev/null; then
-  gem install tmuxinator
-fi
 
 mkdir -p ~/Work/client ~/Work/scratch ~/Work/dev
 
-if [ "$(uname)" == "Linux" ]; then
-  pip install --upgrade pip
-  sudo pip install docker-compose
-fi
-if [ "$(uname)" == "Darwin" ]; then
-  #brew 'docker'
-  #brew 'docker-machine'
-  #brew 'docker-compose'
-  brew tap caskroom/cask
-  brew bundle --file=- <<EOF
-  tap 'caskroom/fonts'
-  cask 'font-inconsolata'
-  cask 'font-fira-mono'
-  cask 'font-fira-code'
-
-  #tap 'codekitchen/dinghy'
-  #brew 'dinghy'
-  brew 'mackup'
-  brew 'trash'
-  cask 'adobe-creative-cloud'
-  cask 'atom'
-  cask 'dropbox'
-  cask 'evernote'
-  cask 'flux'
-  cask 'fluid'
-  #cask 'garmin-basecamp'
-  #cask 'github-desktop'
-  cask 'google-chrome'
-  #cask 'harvest'
-  cask 'ipvanish-vpn'
-  cask 'iterm2'
-  cask 'lastpass'
-  cask 'rowanj-gitx'
-  cask 'skype'
-  cask 'slack'
-  cask 'spotify'
-  #cask 'screenhero'
-  cask 'spectacle'
-  #cask 'sonos'
-  cask 'transmit'
-  cask 'vmware-fusion'
-EOF
 
   cd ~/Library/Fonts && curl -fLo "Inconsolata Nerd Font Complete.otf" https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/Inconsolata/complete/Inconsolata%20Nerd%20Font%20Complete.otf
+  cd -
 
   #source $HOME/.bashrc
 
@@ -250,8 +178,8 @@ EOF
   # Change minimize/maximize window effect
   defaults write com.apple.dock mineffect -string "scale"
 
-  fancy_echo "Hide Spotlight Icon"
-  sudo defaults write /.Spotlight-V100/VolumeConfiguration Exclusions -array "/Volumes"
+  #fancy_echo "Hide Spotlight Icon"
+  #sudo defaults write /.Spotlight-V100/VolumeConfiguration Exclusions -array "/Volumes"
   fancy_echo "Rebuild Spotlight"
   defaults write com.apple.spotlight orderedItems -array \
   	'{"enabled" = 1;"name" = "APPLICATIONS";}' \
@@ -399,7 +327,6 @@ EOF
   killall -HUP Finder
   killall -HUP SystemUIServer
   killall cfprefsd
-fi
 
 # mkdir -p ~/.vim/bundle
 # if [ ! -d "$HOME/.vim/bundle/Vundle.vim" ]; then
@@ -420,41 +347,42 @@ mkdir -p $HOME/.config/fish/functions
 if [ ! -d "$HOME/.config/darcy-setup" ]; then
   git clone git://github.com/darcy/setup.git $HOME/.config/darcy-setup
 fi
-if [ ! -f "$HOME/.config/nvim/init.vim" ]; then
-  ln -s $HOME/.config/darcy-setup/common/config/nvim/init.vim $HOME/.config/nvim/init.vim
-fi
-if [ ! -f "$HOME/.config/fish/config.fish" ]; then
-  ln -s $HOME/.config/darcy-setup/common/config/fish/config.fish $HOME/.config/fish/config.fish
-fi
-if [ ! -f "$HOME/.config/fish/functions/fish_prompt.fish" ]; then
-  ln -s $HOME/.config/darcy-setup/config/fish/functions/fish_prompt.fish $HOME/.config/fish/functions/fish_prompt.fish
+
+HOME=/Users/darcy
+FROM=/Users/darcy/.config/darcy-setup/common
+
+mkdir -p $HOME/.config/nvim/autoload \
+  $HOME/.config/fish/functions \
+  $HOME/.config/fish/completions \
+  $HOME/.config/fontconfig/conf.d \
+  $HOME/.local/share/fonts \
+  $HOME/Work/client \
+  $HOME/Work/dev \
+  $HOME/Work/scratch
+
+[ -f $HOME/.config/nvim/autoload/plug.vim ] || \
+  curl -fLo $HOME/.config/nvim/autoload/plug.vim --create-dirs \
+  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+[ -f $HOME/.config/fish/functions/fisher.fish ] || \
+  curl -fLo $HOME/.config/fish/functions/fisher.fish --create-dirs \
+  https://git.io/fisher
+[ -d $HOME/.tmux/plugins/tpm ] || \
+  git clone https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
+
+if [ -f $HOME/.local/share/fonts/emojione-android.ttf ];then
+  cd $HOME/.local/share/fonts && wget https://github.com/emojione/emojione-assets/releases/download/3.1.4/emojione-android.ttf
+  cd $HOME/.config/fontconfig/conf.d && wget https://aur.archlinux.org/cgit/aur.git/plain/70-emojione-color.conf?h=ttf-emojione
+  fc-cache -f
 fi
 
-if [ ! -f "$HOME/.tmux.conf" ]; then
-  ln -s $HOME/.config/darcy-setup/common/tmux.conf $HOME/.tmux.conf
-fi
-if [ ! -d "$HOME/.config/nvim/autoload/plug.vim" ]; then
-  curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs \
-    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-fi
+ln -nsf $FROM/gitconfig $HOME/.gitconfig
+ln -nsf $FROM/gitignore $HOME/.gitignore
+ln -nsf $FROM/tmux.conf $HOME/.tmux.conf
+ln -nsf $FROM/config/nvim/init.vim $HOME/.config/nvim/init.vim
+ln -nsf $FROM/config/fish/config.fish $HOME/.config/fish/config.fish
+ln -nsf $FROM/config/fish/functions/fish_prompt.fish $HOME/.config/fish/functions/fish_prompt.fish
+ln -nsf $FROM/config/fish/completions/tmuxinator.fish $HOME/.config/fish/completions/tmuxinator.fish
 
-if [ ! -d "$HOME/.config/fish/completions/tmuxinator.fish" ]; then
-  curl -fLo ~/.config/fish/completions/tmuxinator.fish --create-dirs \
-    https://raw.githubusercontent.com/tmuxinator/tmuxinator/master/completion/tmuxinator.fish
-fi
-
-# set -e
-# nvim +PlugInstall +qall
-
-# if [ -f "$HOME/.linuxbrew/bin/fish" ]; then
-#   grep -q -F '$HOME/.linuxbrew/bin/fish' /etc/shells || echo '$HOME/.linuxbrew/bin/fish' | sudo tee -a /etc/shells
-#   chsh -s $HOME/.linuxbrew/bin/fish
-# fi
-# if [ -d "$HOME/.linuxbrew/bin/fish" ]; then
-if [ "$(uname)" == "Linux" ]; then
-  grep -q -F `which fish` /etc/shells || echo `which fish` | sudo tee -a /etc/shells
-  grep -q -F 'fish' /etc/passwd || sudo bash -c "chsh -s `which fish` `whoami`"
-fi
-# fi
+nvim +PlugInstall +qall
 
 fancy_echo "All DONE - might need to restart"
