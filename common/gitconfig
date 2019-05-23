@@ -34,11 +34,11 @@
   autosetupmerge = true
   autosetuprebase = always
 [core]
-  editor = vim
+  editor = nvim
   excludesfile = ~/.gitignore
   autocrlf = input
 [push]
-  default = current
+	default = current
 [heroku]
   account = dbcp
 [mergetool]
