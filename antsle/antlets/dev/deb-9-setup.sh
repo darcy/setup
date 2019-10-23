@@ -9,13 +9,10 @@ apt-get install -y sudo wget software-properties-common curl
 
 apt-get install -y build-essential
 
-apt-get install -y git python-setuptools zsh htop silversearcher-ag \
+apt-get install -y git vim python-setuptools zsh htop silversearcher-ag \
         direnv python3 python3-pip gperf xclip file fish gawk golang-go tmux
 
 # setup docker
-# https://github.com/WhitewaterFoundry/Pengwin/issues/485#issuecomment-518028465
-update-alternatives --set iptables /usr/sbin/iptables-legacy
-update-alternatives --set ip6tables /usr/sbin/ip6tables-legacy
 apt-get install -y apt-transport-https ca-certificates curl gnupg2 software-properties-common
 curl -fsSL https://download.docker.com/linux/debian/gpg | sudo apt-key add -
 add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/debian stretch stable"
@@ -37,6 +34,12 @@ apt-get install -y zlib1g-dev libssl-dev libreadline-dev libgdbm-dev openssl
 # verify pip is up to date
 apt-get install -y python3-pip
 pip3 install --upgrade pip
+
+#yarn 
+curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+apt update
+apt install -y yarn
 
 # install neovim
 apt-get install -y ninja-build gettext libtool libtool-bin autoconf automake cmake g++ pkg-config unzip
