@@ -45,21 +45,22 @@ Plug 'w0ng/vim-hybrid'
 Plug 'joshdick/onedark.vim'
 Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'jnurmine/Zenburn'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 function! DoRemote(arg)
   UpdateRemotePlugins
 endfunction
-Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
+"Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
 "Plug 'ternjs/tern_for_vim', { 'do': 'npm install' }
-Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install tern' }
+"Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install tern' }
 "Plug 'Valloric/MatchTagAlways'
 "
 call plug#end()
 
-let g:deoplete#enable_at_startup = 1
-if !exists('g:deoplete#omni#input_patterns')
-  let g:deoplete#omni#input_patterns = {}
-endif
+"let g:deoplete#enable_at_startup = 1
+"if !exists('g:deoplete#omni#input_patterns')
+"  let g:deoplete#omni#input_patterns = {}
+"endif
 " let g:deoplete#disable_auto_complete = 1
 " autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 " Let <Tab> also do completion
