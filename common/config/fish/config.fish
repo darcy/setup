@@ -62,13 +62,6 @@ alias dcbup='docker-compose stop; docker-compose build; docker-compose -f docker
 alias dcup='docker-compose stop; docker-compose -f docker-compose.yml -f docker-compose.local.yml up'
 alias proxy='docker run -d -p 80:80 -p 443:443 -v /home/ec2-user/.certs:/etc/nginx/certs -v /var/run/docker.sock:/tmp/docker.sock:ro jwilder/nginx-proxy'
 
-alias sshw='ssh -A 52.9.249.65'
-alias sshfp1n='ssh frontpoint@tm26-s00059  -p 7000'
-alias sshfp2n='ssh frontpoint@tm26-s00060  -p 7001'
-alias sshfpdb1n='ssh frontpoint@tm26-s00062  -p 7003'
-alias sshfpsn='ssh frontpoint@tm26-s00058  -p 7000'
-alias top='top -o cpu'
-
 ulimit -n 1024
 eval (direnv hook fish)
 
