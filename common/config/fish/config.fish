@@ -72,3 +72,14 @@ if test -z (pgrep ssh-agent)
   set -Ux SSH_AUTH_SOCK $SSH_AUTH_SOCK
 end
 # [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# tabtab source for packages
+# uninstall by removing these lines
+[ -f ~/.config/tabtab/__tabtab.fish ]; and . ~/.config/tabtab/__tabtab.fish; or true
+
+# tabtab source for serverless package
+# uninstall by removing these lines or running `tabtab uninstall serverless`
+[ -f /Users/darcy/Work/scratch/cndc/create-stack/node_modules/tabtab/.completions/serverless.fish ]; and . /Users/darcy/Work/scratch/cndc/create-stack/node_modules/tabtab/.completions/serverless.fish
+# tabtab source for sls package
+# uninstall by removing these lines or running `tabtab uninstall sls`
+[ -f /Users/darcy/Work/scratch/cndc/create-stack/node_modules/tabtab/.completions/sls.fish ]; and . /Users/darcy/Work/scratch/cndc/create-stack/node_modules/tabtab/.completions/sls.fish
