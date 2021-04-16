@@ -7,7 +7,7 @@ LIST=$(aws ec2 describe-instances --query 'Reservations[*].Instances[*].[Instanc
 DEETS=$(echo "$LIST" | grep $1 | grep running)
 
 INSTANCE_NAME=$(echo "$DEETS" | awk '{print $2;}' | uniq | head -n 1)
-[[ $INSTANCE_NAME == *$'\n'* ]] && echo "multiple instances found for $1..." && echo "$INSTANCE_NAME" && false
+[[ $INSTANCE_NAME == *$'\n'* ]] && echo "multiple instances found for $1..." && echo "$INSTANCE_NAME" && echo "$DEETS" && false
 
 IP=$(echo "$DEETS" | awk 'NR==1{print $5}')
 
