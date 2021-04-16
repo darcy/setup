@@ -30,13 +30,18 @@ Plug 'airblade/vim-gitgutter'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'pangloss/vim-javascript'
 "Plug 'neoclide/vim-jsx-improve'
-Plug 'mxw/vim-jsx'
+Plug 'yuezk/vim-js'
+Plug 'maxmellon/vim-jsx-pretty'
+"Plug 'mxw/vim-jsx'
 Plug 'kchmck/vim-coffee-script'
 Plug 'vim-ruby/vim-ruby'
 Plug 'jreybert/vimagit'
 Plug 'exu/pgsql.vim'
 "Plug 'vim-ctrlspace/vim-ctrlspace'
 Plug 'tomtom/tcomment_vim'
+
+Plug 'godlygeek/tabular'
+Plug 'plasticboy/vim-markdown'
 
 " colorschemes
 Plug 'mhartington/oceanic-next'
@@ -57,10 +62,24 @@ endfunction
 "
 call plug#end()
 
-"let g:deoplete#enable_at_startup = 1
-"if !exists('g:deoplete#omni#input_patterns')
-"  let g:deoplete#omni#input_patterns = {}
-"endif
+" let g:vim_markdown_folding_disabled = 1
+let g:vim_markdown_math = 1
+let g:vim_markdown_toc_autofit = 0
+let g:vim_markdown_strikethrough = 1
+let g:vim_markdown_auto_insert_bullets = 0
+let g:vim_markdown_new_list_item_indent = 0
+
+"let g:vim_markdown_conceal = 0
+
+"let g:vim_markdown_folding_disabled = 1
+let g:vim_markdown_folding_level = 6
+let g:vim_markdown_folding_style_pythonic = 1
+"let g:vim_markdown_override_foldtext = 0
+
+let g:deoplete#enable_at_startup = 1
+if !exists('g:deoplete#omni#input_patterns')
+  let g:deoplete#omni#input_patterns = {}
+endif
 " let g:deoplete#disable_auto_complete = 1
 " autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 " Let <Tab> also do completion
@@ -190,7 +209,9 @@ nnoremap ; :
 " turn on spelling for markdown files
 autocmd FileType markdown,text,html setlocal spell complete+=kspell
 " highlight bad words in red
-autocmd FileType markdown,text,html hi SpellBad guibg=#ff2929 guifg=#ffffff" ctermbg=224
+" autocmd FileType markdown,text,html hi SpellBad guibg=#CD2864 guifg=#ffffff" ctermbg=224
+" autocmd FileType markdown,text,html
+hi SpellBad guibg=#CD2864 guifg=#ffffff" ctermbg=224
 
 " " NERDTree --------------------------------------------
 " "
@@ -281,26 +302,26 @@ set hidden
 " let g:CtrlSpaceSaveWorkspaceOnExit = 1
 "
 " Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
-if executable('ag')
-  " Use Ag over Grep
-  set grepprg=ag\ --nogroup\ --nocolor
-  let g:ackprg = "ag --nogroup --column"
-
-  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-  let g:ctrlp_user_command = 'ag -Q -l --nocolor --ignore .git --hidden -g "" %s'
-
-  " ag is fast enough that CtrlP doesn't need to cache
-  let g:ctrlp_use_caching = 0
-endif
+" if executable('ag')
+"   " Use Ag over Grep
+"   set grepprg=ag\ --nogroup\ --nocolor
+"   let g:ackprg = "ag --nogroup --column"
+"
+"   " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+"   " let g:ctrlp_user_command = 'ag -Q -l --nocolor --ignore .git --hidden -g "" %s'
+"
+"   " ag is fast enough that CtrlP doesn't need to cache
+"   " let g:ctrlp_use_caching = 0
+" endif
 
 " FZF ----------------------------
- map <c-p> :FZF<CR>
- tmap <c-p> <c-\><c-n>:FZF<CR>
- map <leader>a :Ag<CR>
- vmap <leader>aw y:Ag <C-r>0<CR>
- map <leader>h :History<CR>
- map <leader>l :Lines<CR>
- map <leader>m :MagitOnly<CR>
+map <c-p> :GFiles --cached --others --exclude-standard<CR>
+tmap <c-p> <c-\><c-n>:GFiles --cached --others --exclude-standard<CR>
+map <leader>a :Ag<CR>
+vmap <leader>aw y:Ag <C-r>0<CR>
+map <leader>h :History<CR>
+map <leader>l :Lines<CR>
+map <leader>m :MagitOnly<CR>
 
 " Terminal -----------------------
 " :tnoremap <Esc> <C-\><C-n> - this jacks with fzf closing window
@@ -312,22 +333,37 @@ endif
 :tnoremap <A-Down> <C-\><C-n><C-w>j
 :tnoremap <A-Up> <C-\><C-n><C-w>k
 :tnoremap <A-Right> <C-\><C-n><C-w>l
-:nnoremap <A-h> <C-w>h
-:nnoremap <A-j> <C-w>j
-:nnoremap <A-k> <C-w>k
-:nnoremap <A-l> <C-w>l
+" :nnoremap <A-h> <C-w>h
+" :nnoremap <A-j> <C-w>j
+" :nnoremap <A-k> <C-w>k
+" :nnoremap <A-l> <C-w>l
 :nnoremap <A-Up> <C-w>k
 :nnoremap <A-Down> <C-w>j
 :nnoremap <D-Left> <C-w>h
 :nnoremap <D-Right> <C-w>l
-:nnoremap <A-Left> <C-w>h
-:nnoremap <A-Right> <C-w>l
-:nmap <A-Left> :bprev<CR>
-:nmap <A-Right> :bnext<CR>
-:nmap <A-h> :bprev<CR>
-:nmap <A-l> :bnext<CR>
-:nmap <D-Left> :bprev<CR>
-:nmap <D-Right> :bnext<CR>
+" :nnoremap <A-Left> <C-w>h
+" :nnoremap <A-Right> <C-w>l
+:nnoremap <A-Left> :bprev<CR>
+:nnoremap <A-Right> :bnext<CR>
+
+:nnoremap ˙ :bprev<CR>
+:nnoremap <A-h> :bprev<CR>
+:nnoremap ¬ :bnext<CR>
+:nnoremap <A-l> :bnext<CR>
+
+" map Alt jk to move line up and down
+" "https://vim.fandom.com/wiki/Moving_lines_up_or_down
+nnoremap ˚ :m .+1<CR>==
+nnoremap ∆ :m .-2<CR>==
+inoremap ˚ <Esc>:m .+1<CR>==gi
+inoremap ∆ <Esc>:m .-2<CR>==gi
+vnoremap ˚ :m '>+1<CR>gv=gv
+vnoremap ∆ :m '<-2<CR>gv=gv
+
+" :nmap <A-h> :bprev<CR>
+" :nmap <A-l> :bnext<CR>
+" :nmap <D-Left> :bprev<CR>
+" :nmap <D-Right> :bnext<CR>
 
 :map <C-h> <C-w>h
 :map <C-j> <C-w>j
@@ -385,3 +421,6 @@ inoremap <esc> NO ESCAPE FOR YOU
 inoremap jk <esc>
 inoremap jj <esc>
 inoremap kj <esc>
+
+set path+=**
+set wildignore+=**/node_modules/**
