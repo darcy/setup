@@ -260,7 +260,9 @@ hi SpellBad guibg=#CD2864 guifg=#ffffff" ctermbg=224
 " set noswapfile
 
 " nmap <A-w> :bp\|bd #<CR>
-nmap <expr> <silent> <C-w> len(filter(range(1, bufnr('$')), 'buflisted(v:val)')) == 1 ? ':bd<CR>' : ':bp<CR>:bd #<CR>'
+" nmap <expr> <silent> <C-w> len(filter(range(1, bufnr('$')), 'buflisted(v:val)')) == 1 ? ':bd<CR>' : ':bp<CR>:bd #<CR>'
+nmap <expr> <silent> ∑ len(filter(range(1, bufnr('$')), 'buflisted(v:val)')) == 1 ? ':bd<CR>' : ':bp<CR>:bd #<CR>'
+
 
 
 " move tabs to the end for new, single buffers (exclude splits)
@@ -323,6 +325,10 @@ vmap <leader>aw y:Ag <C-r>0<CR>
 map <leader>h :History<CR>
 map <leader>l :Lines<CR>
 map <leader>m :MagitOnly<CR>
+" nmap <silent> <c-k> :wincmd k<CR>
+" nmap <silent> <c-j> :wincmd j<CR>
+" nmap <silent> <c-h> :wincmd h<CR>
+" nmap <silent> <c-l> :wincmd l<CR>
 
 " Terminal -----------------------
 " :tnoremap <Esc> <C-\><C-n> - this jacks with fzf closing window
@@ -360,7 +366,6 @@ inoremap ˚ <Esc>:m .+1<CR>==gi
 inoremap ∆ <Esc>:m .-2<CR>==gi
 vnoremap ˚ :m '>+1<CR>gv=gv
 vnoremap ∆ :m '<-2<CR>gv=gv
-
 " :nmap <A-h> :bprev<CR>
 " :nmap <A-l> :bnext<CR>
 " :nmap <D-Left> :bprev<CR>
