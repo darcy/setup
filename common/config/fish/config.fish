@@ -65,12 +65,12 @@ alias proxy='docker run -d -p 80:80 -p 443:443 -v /home/ec2-user/.certs:/etc/ngi
 ulimit -n 1024
 eval (direnv hook fish)
 
-if test -z (pgrep ssh-agent)
-  eval (ssh-agent -c)
-  set -Ux SSH_AUTH_SOCK $SSH_AUTH_SOCK
-  set -Ux SSH_AGENT_PID $SSH_AGENT_PID
-  set -Ux SSH_AUTH_SOCK $SSH_AUTH_SOCK
-end
+# if test -z (pgrep ssh-agent)
+#   eval (ssh-agent -c)
+#   set -Ux SSH_AUTH_SOCK $SSH_AUTH_SOCK
+#   set -Ux SSH_AGENT_PID $SSH_AGENT_PID
+#   set -Ux SSH_AUTH_SOCK $SSH_AUTH_SOCK
+# end
 # [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # tabtab source for packages

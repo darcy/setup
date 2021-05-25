@@ -24,7 +24,7 @@ Plug 'neomake/neomake'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'vim-airline/vim-airline'
-Plug 'altercation/vim-colors-solarized'
+"Plug 'altercation/vim-colors-solarized'
 Plug 'ryanoasis/vim-devicons'
 Plug 'airblade/vim-gitgutter'
 Plug 'terryma/vim-multiple-cursors'
@@ -37,6 +37,8 @@ Plug 'iamcco/coc-tailwindcss',  {'do': 'yarn install --frozen-lockfile && yarn r
 Plug 'kchmck/vim-coffee-script'
 Plug 'vim-ruby/vim-ruby'
 Plug 'jreybert/vimagit'
+Plug 'TaDaa/vimade'
+Plug 'tmux-plugins/vim-tmux-focus-events'
 Plug 'exu/pgsql.vim'
 "Plug 'vim-ctrlspace/vim-ctrlspace'
 Plug 'tomtom/tcomment_vim'
@@ -52,6 +54,8 @@ Plug 'joshdick/onedark.vim'
 Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'jnurmine/Zenburn'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
+let g:vimade = { "basebg": [33,33,33], "enablefocusfading": 1 }
 
 function! DoRemote(arg)
   UpdateRemotePlugins
@@ -108,6 +112,7 @@ let g:neomake_javascript_enabled_makers = ['eslint']
 
 
 " Theme
+set t_Co=256
 syntax enable
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
@@ -117,10 +122,11 @@ endif
 
 set cursorline
 "janah
-  autocmd ColorScheme janah highlight Normal ctermbg=150
-  set background=dark
+  "autocmd ColorScheme janah highlight Normal ctermbg=150
+  " set background=dark
+  "colorscheme janah
+
   colorscheme OceanicNext
-  colorscheme janah
   " highlight DiffDelete guifg=#ec5f67 ctermfg=203 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
   " highlight DiffAdd guifg=#87ff5f ctermfg=114 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
   " highlight DiffChange guifg=#65737e ctermfg=243 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
@@ -145,7 +151,6 @@ set cursorline
 
 " zenburn
 " colors zenburn
-
 
 let g:airline_theme='oceanicnext'
 let g:airline#extensions#tabline#enabled = 1
