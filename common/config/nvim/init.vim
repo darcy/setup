@@ -48,6 +48,7 @@ Plug 'plasticboy/vim-markdown'
 
 " colorschemes
 Plug 'mhartington/oceanic-next'
+Plug 'chriskempson/base16-vim'
 Plug 'mhinz/vim-janah'
 Plug 'w0ng/vim-hybrid'
 Plug 'joshdick/onedark.vim'
@@ -126,7 +127,16 @@ set cursorline
   " set background=dark
   "colorscheme janah
 
-  colorscheme OceanicNext
+colorscheme base16-solarflare
+" function! s:base16_customize() abort
+"   call Base16hi("MatchParen", g:base16_gui05, g:base16_gui03, g:base16_cterm05, g:base16_cterm03, "bold,italic", "")
+" endfunction
+"
+" augroup on_change_colorschema
+"   autocmd!
+"   autocmd ColorScheme * call s:base16_customize()
+" augroup END
+  " colorscheme OceanicNext
   " highlight DiffDelete guifg=#ec5f67 ctermfg=203 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
   " highlight DiffAdd guifg=#87ff5f ctermfg=114 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
   " highlight DiffChange guifg=#65737e ctermfg=243 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
