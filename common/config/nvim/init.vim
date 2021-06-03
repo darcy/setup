@@ -4,6 +4,8 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'VundleVim/Vundle.vim'
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-rhubarb'
+Plug 'junegunn/gv.vim'
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-rails'
 "Plug 'tpope/vim-vinegar'
@@ -279,6 +281,9 @@ hi SpellBad guibg=#CD2864 guifg=#ffffff" ctermbg=224
 nmap <expr> <silent> ∑ len(filter(range(1, bufnr('$')), 'buflisted(v:val)')) == 1 ? ':bd<CR>' : ':bp<CR>:bd #<CR>'
 
 
+" git diff mapping
+nmap <leader>gl :diffget //3<CR>
+nmap <leader>gh :diffget //2<CR>
 
 " move tabs to the end for new, single buffers (exclude splits)
 " autocmd BufNew * if winnr('$') == 1 | tabmove99 | endif
@@ -475,3 +480,6 @@ endif
 inoremap <silent><expr> <cr> pumvisible() ? "\<C-g>u\<c-r>=coc#on_enter()\<CR>" : "\<CR>"
 "inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
+
+" update GiGutter when file saved
+autocmd BufWritePost * GitGutter
