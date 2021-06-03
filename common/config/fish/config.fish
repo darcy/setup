@@ -36,28 +36,7 @@ alias cds='cd ~/Work/scratch'
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
-alias dev='ssh -A -i ~/.ssh/Workstation-west2.pem  ec2-user@dev.darcybrown.com'
 alias gitm="nvim -c MagitOnly"
-#git
-# alias gm='git merge'
-# alias grm='git rebase master'
-# alias gb='git branch --color'
-# alias gba='git branch --color -a'
-# alias gsb='git show-branch'
-# alias gfix='git commit --amend'
-# alias gc='git commit -v'
-# alias gco='git checkout'
-# alias gd='git diff'
-# alias glog='git log --stat'
-# # alias gl='git pull'
-# alias glf='git fetch;git rebase --preserve-merges origin/$1'
-# alias gp='git push'
-# alias gst='git status'
-# alias gs='git stash'
-# alias gsa='git stash apply'
-# alias gclean='git clean -df'
-# alias gitrmall='git ls-files --deleted | xargs git rm'
-# alias git='hub'
 alias dcbup='docker-compose stop; docker-compose build; docker-compose -f docker-compose.yml -f docker-compose.local.yml up'
 alias dcup='docker-compose stop; docker-compose -f docker-compose.yml -f docker-compose.local.yml up'
 alias proxy='docker run -d -p 80:80 -p 443:443 -v /home/ec2-user/.certs:/etc/nginx/certs -v /var/run/docker.sock:/tmp/docker.sock:ro jwilder/nginx-proxy'
@@ -65,6 +44,7 @@ alias proxy='docker run -d -p 80:80 -p 443:443 -v /home/ec2-user/.certs:/etc/ngi
 ulimit -n 1024
 eval (direnv hook fish)
 
+ln -sf $SSH_AUTH_SOCK ~/.ssh/ssh_auth_sock
 # if test -z (pgrep ssh-agent)
 #   eval (ssh-agent -c)
 #   set -Ux SSH_AUTH_SOCK $SSH_AUTH_SOCK
