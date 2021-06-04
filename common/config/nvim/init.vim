@@ -344,7 +344,7 @@ map <leader>a :Ag<CR>
 vmap <leader>aw y:Ag <C-r>0<CR>
 map <leader>h :History<CR>
 map <leader>l :Lines<CR>
-map <leader>m :MagitOnly<CR>
+map <leader>m :G<CR>
 " nmap <silent> <c-k> :wincmd k<CR>
 " nmap <silent> <c-j> :wincmd j<CR>
 " nmap <silent> <c-h> :wincmd h<CR>
