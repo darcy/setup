@@ -44,33 +44,42 @@ function fish_prompt
     end
   end
 
-  set -l cyan (set_color -o cyan)
-  set -l yellow (set_color -o yellow)
-  set -l red (set_color -o red)
-  set -l blue (set_color -o blue)
-  set -l normal (set_color normal)
+#         ﲏ 
 
-  set -l arrow "$red➜ "
-  if [ $USER = 'root' ]
-    set arrow "$red# "
-  end
-
-  set -l cwd $cyan(basename (prompt_pwd))
+  set -l cwd (basename (prompt_pwd))
 
   set -l repo_type (_repo_type)
   if [ $repo_type ]
-    set -l repo_branch $cyan(_repo_branch_name $repo_type)
-    set repo_info "$blue $repo_type:($repo_branch$blue)"
-
-    if [ (_is_repo_dirty $repo_type) ]
-      set -l dirty "$yellow ✗"
-      set repo_info "$repo_info$dirty"
-    end
+    set -l repo_branch (_repo_branch_name $repo_type)
+    set repo_info "$repo_branch"
   end
 
+  set -g fish_term24bit 1
   set -g __fish_prompt_hostname (hostname|cut -d . -f 1)
-  set host "$blue$__fish_prompt_hostname:"
+  set host "$__fish_prompt_hostname"
 
   # echo -n -s $arrow ' '$cwd $repo_info $normal ' '
-  echo -n $host$cwd $repo_info (set_color red)'❯'(set_color yellow)'❯'(set_color green)'❯ '
+  # echo -n (set_color -b cyan)(set_color white)$host$cwd $repo_info (set_color -b blue)(set_color cyan)" "'❯'(set_color cyan)'❯'(set_color normal)(set_color magenta)'❯ '
+
+  echo -n (set_color -b 5FB3B3)(set_color D8DEE9)
+  #if [ string match -q (uname) "Darwin" ]
+  switch (uname -a | cut -d ' ' -f 1)
+    case 'Linux'
+      echo -n "  "
+    case 'Darwin'
+      echo -n "  "
+  end
+  echo -n " "$host" "
+  echo -n (set_color -b 343d46)(set_color 5FB3B3)""
+  echo -n (set_color A7ADBA)"   "$cwd" "
+  echo -n (set_color -b 4f5b66)(set_color 343d46)""
+  if [ $repo_type ]
+    if [ (_is_repo_dirty $repo_type) ]
+      echo -n (set_color ec5f67)"  "$repo_info" ✗ "
+    else
+      echo -n (set_color 99C794)"  "$repo_info"  "
+    end
+  end
+  echo -n (set_color normal)(set_color 4f5b66)" "
+  echo -n (set_color normal)
 end
