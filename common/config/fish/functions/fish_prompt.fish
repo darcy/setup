@@ -70,16 +70,22 @@ function fish_prompt
 
 
   if [ $repo_type ]
-    if [ (_is_repo_dirty $repo_type) ]
-      #echo -n (set_color ec5f67)"  "$repo_info" ✗ "
-      echo -n (set_color f99157)"  "$repo_info" ✗ "
-    else
-      echo -n (set_color 99C794)"  "$repo_info"  "
-    end
-    echo -n (set_color -b 343d46)(set_color 4f5b66)""
     set -l cwd (basename (git rev-parse --show-toplevel))
     set -l subpwd (string replace (git rev-parse --show-toplevel) "" (pwd))
-    echo -n (set_color -b 343d46)(set_color A7ADBA)"  "$cwd$subpwd" "
+    set -l ahead (string match "*ahead*" (git status -s -b))
+    set -l behind (string match "*behind*" (git status -s -b))
+
+    echo -n (set_color a7adba)"  "$repo_info" "
+    echo -n (set_color -b 343d46)(set_color 4f5b66)""
+    if [ (_is_repo_dirty $repo_type) ]
+      echo -n (set_color -b 343d46)(set_color f99157)"  "$cwd$subpwd" "
+    else if [ $ahead ]
+      echo -n (set_color -b 343d46)(set_color fac863)"  "$cwd$subpwd" "
+    else if [ $behind ]
+      echo -n (set_color -b 343d46)(set_color ec5f67)"  "$cwd$subpwd" "
+    else
+      echo -n (set_color -b 343d46)(set_color 99C794)"  "$cwd$subpwd" "
+    end
 
   else
     set -l cwd (basename (prompt_pwd))
