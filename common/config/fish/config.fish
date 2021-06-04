@@ -33,6 +33,7 @@ alias vi="vim"
 alias cdc='cd ~/Work/client'
 alias cdd='cd ~/Work/dev'
 alias cds='cd ~/Work/scratch'
+alias cdg='cd (git rev-parse --show-toplevel)'
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'

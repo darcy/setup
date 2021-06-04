@@ -45,8 +45,7 @@ function fish_prompt
   end
 
 #         ﲏ 
-
-  set -l cwd (basename (prompt_pwd))
+# https://github.com/vim-airline/vim-airline-themes/blob/master/autoload/airline/themes/base16_oceanicnext.vim
 
   set -l repo_type (_repo_type)
   if [ $repo_type ]
@@ -58,9 +57,6 @@ function fish_prompt
   set -g __fish_prompt_hostname (hostname|cut -d . -f 1)
   set host "$__fish_prompt_hostname"
 
-  # echo -n -s $arrow ' '$cwd $repo_info $normal ' '
-  # echo -n (set_color -b cyan)(set_color white)$host$cwd $repo_info (set_color -b blue)(set_color cyan)" "'❯'(set_color cyan)'❯'(set_color normal)(set_color magenta)'❯ '
-
   echo -n (set_color -b 5FB3B3)(set_color D8DEE9)
   #if [ string match -q (uname) "Darwin" ]
   switch (uname -a | cut -d ' ' -f 1)
@@ -70,16 +66,27 @@ function fish_prompt
       echo -n "  "
   end
   echo -n " "$host" "
-  echo -n (set_color -b 343d46)(set_color 5FB3B3)""
-  echo -n (set_color A7ADBA)"   "$cwd" "
-  echo -n (set_color -b 4f5b66)(set_color 343d46)""
+  echo -n (set_color -b 4f5b66)(set_color 5FB3B3)""
+
+
   if [ $repo_type ]
     if [ (_is_repo_dirty $repo_type) ]
-      echo -n (set_color ec5f67)"  "$repo_info" ✗ "
+      #echo -n (set_color ec5f67)"  "$repo_info" ✗ "
+      echo -n (set_color f99157)"  "$repo_info" ✗ "
     else
       echo -n (set_color 99C794)"  "$repo_info"  "
     end
+    echo -n (set_color -b 343d46)(set_color 4f5b66)""
+    set -l cwd (basename (git rev-parse --show-toplevel))
+    set -l subpwd (string replace (git rev-parse --show-toplevel) "" (pwd))
+    echo -n (set_color -b 343d46)(set_color A7ADBA)"  "$cwd$subpwd" "
+
+  else
+    set -l cwd (basename (prompt_pwd))
+    echo -n (set_color -b 343d46)(set_color 4f5b66)""
+    echo -n (set_color -b 343d46)(set_color A7ADBA)"   "$cwd" "
   end
-  echo -n (set_color normal)(set_color 4f5b66)" "
+  echo -n (set_color normal)(set_color 343d46)" "
+
   echo -n (set_color normal)
 end
