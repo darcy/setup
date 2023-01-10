@@ -12,6 +12,7 @@ Plug 'tpope/vim-rails'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 " Plug 'tpope/vim-projectionist'
+Plug 'github/copilot.vim'
 Plug 'tpope/vim-jdaddy'
 Plug 'tomlion/vim-solidity'
 Plug 'justinmk/vim-dirvish'
@@ -113,6 +114,7 @@ let g:tern_show_signature_in_pum = 0  " This do disable full signature type on a
 autocmd! BufWritePost,BufEnter * Neomake
 let g:neomake_javascript_enabled_makers = ['eslint']
 
+set previewheight=30
 
 " Theme
 set t_Co=256
@@ -344,7 +346,8 @@ map <leader>a :Ag<CR>
 vmap <leader>aw y:Ag <C-r>0<CR>
 map <leader>h :History<CR>
 map <leader>l :Lines<CR>
-map <leader>m :G<CR>
+map <leader>m :vertical Git<CR>
+" map <leader>m :Git<CR>:40wincmd_<CR>
 " nmap <silent> <c-k> :wincmd k<CR>
 " nmap <silent> <c-j> :wincmd j<CR>
 " nmap <silent> <c-h> :wincmd h<CR>

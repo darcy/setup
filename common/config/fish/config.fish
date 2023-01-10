@@ -33,6 +33,7 @@ alias vi="vim"
 alias cdc='cd ~/Work/client'
 alias cdd='cd ~/Work/dev'
 alias cds='cd ~/Work/scratch'
+alias cdz='cd ~/Work/zippy'
 alias cdg='cd (git rev-parse --show-toplevel)'
 alias ..='cd ..'
 alias ...='cd ../..'
@@ -42,6 +43,11 @@ alias gitm="nvim -c 'Gstatus | wincmd j | hide' ."
 alias dcbup='docker-compose stop; docker-compose build; docker-compose -f docker-compose.yml -f docker-compose.local.yml up'
 alias dcup='docker-compose stop; docker-compose -f docker-compose.yml -f docker-compose.local.yml up'
 alias proxy='docker run -d -p 80:80 -p 443:443 -v /home/ec2-user/.certs:/etc/nginx/certs -v /var/run/docker.sock:/tmp/docker.sock:ro jwilder/nginx-proxy'
+
+alias docked='docker run --rm -it -v $PWD:/rails -v ruby-bundle-cache:/bundle -p 3000:3000 ghcr.io/rails/cli'
+alias gbs='git branch --sort=-committerdate'
+alias gb='git branch'
+alias gbc='git branch --contains'
 
 ulimit -n 1024
 eval (direnv hook fish)
